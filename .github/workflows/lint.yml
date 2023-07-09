@@ -1,0 +1,35 @@
+name: hollyDesk CI
+
+on:
+  push:
+    # Run on all branches
+    branches:
+      - "*"
+    # Run only if files modified are not docs
+    paths-ignore:
+      - "*.md"
+  pull_request:
+    # Run on all branches
+    branches:
+      - "*"
+    # Run only if files modified are not docs
+    paths-ignore:
+      - "*.md"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: |
+          yarn install --frozen-lockfile
+          yarn format
+          yarn lint
