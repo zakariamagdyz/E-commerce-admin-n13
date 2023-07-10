@@ -6,10 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --fix --max-warnings=0",
+    "lint-check": "next lint --max-warnings=0",
+    "lint:fix": "next lint --max-warnings=0",
+    "format:check": "prettier --check .",
     "format": "prettier --write .",
     "type-check": "tsc --noEmit",
-    "test": "jest --passWithNoTests --bail "
+    "test": "jest --passWithNoTests --bail ",
+    "test:ci": "jest --coverage"
   },
   "dependencies": {
     "@types/node": "20.4.1",
