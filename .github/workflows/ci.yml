@@ -17,7 +17,23 @@ on:
       - "*.md"
 
 jobs:
-  prettier:
+  Type-Check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Run Ts-type check
+        run: yarn type:check
+
+  Format-Check:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -33,7 +49,7 @@ jobs:
       - name: Run Prettier check
         run: yarn format:check
 
-  lint:
+  Lint-Check:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -49,7 +65,7 @@ jobs:
       - name: Run Lint check
         run: yarn lint:check
 
-  test:
+  Test-Check:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -67,7 +83,7 @@ jobs:
       - name: Run tests
         run: yarn test
 
-  build:
+  build-Check:
     runs-on: ubuntu-latest
     strategy:
       matrix:
