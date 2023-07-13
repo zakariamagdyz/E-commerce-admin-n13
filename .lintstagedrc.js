@@ -8,6 +8,7 @@ const buildEslintCommand = (filenames) =>
     .join(" --file ")}`
 
 module.exports = {
-  "*": "prettier -uw --cache",
-  "**/*.{js,jsx,ts,tsx}": [buildEslintCommand],
+  "src/**/*.{ts,tsx}": "tsc-files --noEmit",
+  "src/**/*.{js,jsx,ts,tsx,css,md,json}": "prettier -uw --cache",
+  "src/**/*.{js,jsx,ts,tsx}": [buildEslintCommand],
 }
