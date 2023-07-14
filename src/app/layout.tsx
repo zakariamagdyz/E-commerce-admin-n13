@@ -4,9 +4,10 @@ import type { Metadata } from "next"
 
 import Navbar from "@/components/Navbar"
 import AuthProvider from "@/providers/auth-provider"
+import { ModalProvider } from "@/providers/modal-provider"
 import { ThemeProvider } from "@/providers/theme-provider"
 import { ToastProvider } from "@/providers/toast-provider"
-import { inter } from "@/utils/fonts"
+import { InterFont } from "@/utils/fonts"
 
 export const metadata: Metadata = {
   title: "Admin Dashboard",
@@ -20,10 +21,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={InterFont.className}>
         <AuthProvider>
           <ThemeProvider enableSystem attribute="class" defaultTheme="system">
             <ToastProvider />
+            <ModalProvider />
             <Navbar />
             {children}
           </ThemeProvider>

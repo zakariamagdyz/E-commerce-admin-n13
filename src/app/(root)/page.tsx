@@ -1,9 +1,10 @@
-import UserInfo from "./components/UserInfo"
+"use client"
+import SetupPage from "./SetupPage"
 
 export default function Home() {
   return (
-    <main className="text-center">
-      <UserInfo />
+    <main>
+      <SetupPage />
     </main>
   )
 }

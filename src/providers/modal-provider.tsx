@@ -1,24 +1,24 @@
-// "use client"
+"use client"
 
-// import { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
-// import { StoreModal } from "@/components/modals/store-modal"
+import StoreModal from "@/components/modals/store-modal"
 
-// export const ModalProvider = () => {
-//   const [isMounted, setIsMounted] = useState(false)
+export const ModalProvider = () => {
+  const [isMounted, setIsMounted] = useState(false)
 
-//   useEffect(() => {
-//     setIsMounted(true)
-//   }, [])
+  // Avoid hydration mismatch between server and client
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
-//   if (!isMounted) {
-//     return null
-//   }
+  if (!isMounted) {
+    return null
+  }
 
-//   return (
-//     <>
-//       <StoreModal />
-//     </>
-//   )
-// }
-export {}
+  return (
+    <>
+      <StoreModal />
+    </>
+  )
+}
