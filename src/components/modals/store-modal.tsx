@@ -5,8 +5,7 @@ import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
 import { z } from "zod"
 
-import { useStoreModal } from "../../hooks/use-store-modal"
-import { Button } from "../ui/button"
+import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -14,9 +13,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form"
-import { Input } from "../ui/input"
-import Modal from "../ui/modal"
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import Modal from "@/components/ui/modal"
+import { useStoreModal } from "@/hooks/use-store-modal"
 
 const formSchema = z.object({
   name: z.string().min(2, {
