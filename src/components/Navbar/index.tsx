@@ -1,41 +1,24 @@
-"use client"
-import Link from "next/link"
-import { signOut, useSession } from "next-auth/react"
-import React from "react"
+import prismadb from "@/lib/prismadb"
 
-import { Button } from "../ui/button"
+import MainNav from "./main-nav"
+import StoreSwitcher from "./store-switcher"
+import UserButton from "./user-button"
 
-function Navbar() {
-  const { data, status } = useSession()
+type Props = { userId: string }
+async function Navbar({ userId }: Props) {
+  const stores = await prismadb.store.findMany({
+    where: { userId },
+  })
 
-  if (status === "loading") return null
   return (
-    <nav className="bg-blue-800 p-4 text-white">
-      <ul className="flex justify-evenly text-2xl font-bold">
-        <li>
-          <Button asChild variant={"link"} className="text-white">
-            <Link href="/products">product</Link>
-          </Button>
-        </li>
-        {!data?.user && (
-          <li>
-            <Button asChild variant={"link"} className="text-white">
-              <Link href="/signin">Sign in</Link>
-            </Button>
-          </li>
-        )}
-        {data?.user && (
-          <li>
-            <Button
-              variant={"link"}
-              className="text-white"
-              onClick={() => signOut({ callbackUrl: "/" })}
-            >
-              Sign out
-            </Button>
-          </li>
-        )}
-      </ul>
+    <nav className=" flex  min-h-[4rem] items-center border-b">
+      <section className="container flex items-center">
+        <StoreSwitcher items={stores} />
+        <MainNav />
+        <div className="ml-auto flex items-center space-x-4">
+          <UserButton />
+        </div>{" "}
+      </section>
     </nav>
   )
 }

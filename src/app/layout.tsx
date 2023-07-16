@@ -1,8 +1,7 @@
 import "./global.css"
 
-import type { Metadata } from "next"
+import { Metadata } from "next"
 
-import Navbar from "@/components/Navbar"
 import AuthProvider from "@/providers/auth-provider"
 import { ModalProvider } from "@/providers/modal-provider"
 import { ThemeProvider } from "@/providers/theme-provider"
@@ -26,7 +25,6 @@ export default function RootLayout({
           <ThemeProvider enableSystem attribute="class" defaultTheme="system">
             <ToastProvider />
             <ModalProvider />
-            <Navbar />
             {children}
           </ThemeProvider>
         </AuthProvider>

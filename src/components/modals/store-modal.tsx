@@ -1,6 +1,5 @@
 "use client"
 import { zodResolver } from "@hookform/resolvers/zod"
-import React from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
 import { z } from "zod"
@@ -43,11 +42,13 @@ function StoreModal() {
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.message)
-      toast.success("Store created.")
       form.reset()
+      window.location.assign(`/${data.id}`)
     } catch (error) {
-      console.error(error)
-      toast.error("Something went wrong.")
+      if (error instanceof Error) {
+        console.log(error.message)
+        toast.error("Something went wrong.")
+      }
     }
   }
 
