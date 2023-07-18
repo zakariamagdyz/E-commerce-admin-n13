@@ -1,7 +1,27 @@
-import React from "react"
+import { redirect } from "next/navigation"
 
-function Settingss() {
-  return <div>Settingss</div>
+import prismadb from "@/lib/prismadb"
+import { checkForSession } from "@/utils/checkForSession"
+
+type Props = {
+  params: { storeId: string }
 }
 
-export default Settingss
+async function SettingsPage({ params }: Props) {
+  const session = await checkForSession()
+
+  const store = await prismadb.store.findFirst({
+    where: { id: params.storeId, userId: session.id },
+  })
+
+  if (!store) redirect("/")
+  store.id
+
+  return (
+    <div className="flex-col">
+      <div className="flex-1 space-y-4 p-8 pt-6">Hello settings</div>
+    </div>
+  )
+}
+
+export default SettingsPage

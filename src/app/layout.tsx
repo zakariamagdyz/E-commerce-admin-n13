@@ -22,7 +22,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={InterFont.className}>
         <AuthProvider>
-          <ThemeProvider enableSystem attribute="class" defaultTheme="system">
+          {/* <ThemeProvider enableSystem attribute="class" defaultTheme="system"> */}
+          <ThemeProvider enableSystem attribute="class" defaultTheme="light">
             <ToastProvider />
             <ModalProvider />
             {children}

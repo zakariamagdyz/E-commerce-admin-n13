@@ -56,9 +56,9 @@ function StoreSwitcher({ items = [] }: Props) {
           aria-expanded={open}
           className={cn("w-[200px] justify-between")}
         >
-          <StoreIcon className="mr-2 h-4 w-4 text-gray-500" />
+          <StoreIcon className="me-2 h-4 w-4 text-gray-500" />
           {selected?.label || "Select a store"}
-          <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
+          <ChevronsUpDown className="ms-auto h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
@@ -73,11 +73,11 @@ function StoreSwitcher({ items = [] }: Props) {
                   className="text-sm"
                   onSelect={() => onStoreSelect(item)}
                 >
-                  <StoreIcon className="mr-2 h-4 w-4 text-gray-500" />
+                  <StoreIcon className="me-2 h-4 w-4 text-gray-500" />
                   {item.label}
                   <Check
                     className={cn(
-                      "ml-auto h-4 w-4",
+                      "ms-auto h-4 w-4",
                       selected?.value === item.value
                         ? "opacity-100"
                         : "opacity-0"
@@ -97,7 +97,7 @@ function StoreSwitcher({ items = [] }: Props) {
                   storeModal.openModal()
                 }}
               >
-                <PlusCircle className="mr-2 h-5 w-5" />
+                <PlusCircle className="me-2 h-5 w-5" />
                 Create store
               </CommandItem>
             </CommandGroup>
