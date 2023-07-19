@@ -1,18 +1,31 @@
 import { Metadata } from "next"
 
-import prismadb from "@/lib/prismadb"
+import { checkForSession } from "@/utils/checkForSession"
 
-export const metadata: Metadata = {
-  title: "Store",
-  description: "this is store info",
+import { getStoreApi } from "./service"
+
+type Props = {
+  params: { storeId: string }
 }
 
-async function page({ params }: { params: { storeId: string } }) {
-  const store = await prismadb.store.findFirst({
-    where: { id: params.storeId },
-  })
+export async function generateMetadata({ params: { storeId } }: Props): Promise<Metadata> {
+  const user = await checkForSession()
+  const store = await getStoreApi(storeId, user.id)
+  if (!store) {
+    return { title: "Store Not Found" }
+  }
 
-  return <div>{store?.name}</div>
+  return {
+    title: store.name,
+    description: `This is the page of ${store.name}`,
+  }
+}
+
+async function page({ params }: Props) {
+  const user = await checkForSession()
+  const store = await getStoreApi(params.storeId, user.id)
+
+  return <main className="container">{store?.name}</main>
 }
 
 export default page

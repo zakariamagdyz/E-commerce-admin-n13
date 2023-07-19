@@ -12,7 +12,7 @@ async function Navbar({ userId }: Props) {
 
   return (
     <nav className=" flex  min-h-[4rem] items-center border-b">
-      <section className="container flex items-center">
+      <section className="container flex items-center gap-3">
         <StoreSwitcher items={stores} />
         <MainNav />
         <div className="ml-auto flex items-center space-x-4">

@@ -4,7 +4,7 @@ import { useEffect } from "react"
 
 import { useStoreModal } from "@/hooks/use-store-modal"
 
-export default function PageContent() {
+export default function RootStoreModal() {
   const openModal = useStoreModal((store) => store.openModal)
   const isOpen = useStoreModal((store) => store.isOpen)
 

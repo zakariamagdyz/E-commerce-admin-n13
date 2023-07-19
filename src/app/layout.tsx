@@ -13,13 +13,9 @@ export const metadata: Metadata = {
   description: "Admin Dashboard",
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" dir="ltr">
       <body className={InterFont.className}>
         <AuthProvider>
           {/* <ThemeProvider enableSystem attribute="class" defaultTheme="system"> */}
