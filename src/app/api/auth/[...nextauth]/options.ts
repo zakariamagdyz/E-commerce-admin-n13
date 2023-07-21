@@ -1,12 +1,16 @@
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { NextAuthOptions } from "next-auth"
 import GithubProvider, { GithubProfile } from "next-auth/providers/github"
+
+import prismadb from "@/lib/prismadb"
 
 export const options: NextAuthOptions = {
   providers: [
     GithubProvider({
       profile(profile: GithubProfile) {
         return {
-          ...profile,
+          name: profile.name ?? profile.login,
+          email: profile.email,
           role: profile.role ?? "user",
           id: profile.id.toString(),
           image: profile.avatar_url,
@@ -16,8 +20,18 @@ export const options: NextAuthOptions = {
       clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
     }),
     // ...add more providers here
+    // GithubProvider({
+    //   clientId: process.env.GITHUB_CLIENT_ID as string,
+    //   clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+    // }),
   ],
   pages: { signIn: "/signin" },
+  adapter: PrismaAdapter(prismadb),
+
+  debug: process.env.NODE_ENV === "development",
+  session: {
+    strategy: "jwt",
+  },
   callbacks: {
     // Ref: https://authjs.dev/guides/basics/role-based-access-control#persisting-the-role
     async jwt({ token, user }) {

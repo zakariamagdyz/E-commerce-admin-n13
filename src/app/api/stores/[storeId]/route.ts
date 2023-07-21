@@ -24,7 +24,7 @@ export async function PATCH(req: Request, { params }: { params: { storeId: strin
     const body = await req.json()
     const { name } = await patchBodySchema.parseAsync(body)
 
-    const store = await prismadb.store.updateMany({
+    const store = await prismadb.store.update({
       where: { id: params.storeId, userId: session.user.id },
       data: { name },
     })
@@ -62,7 +62,7 @@ export async function DELETE(_req: Request, { params }: { params: { storeId: str
         }
       )
     }
-    await prismadb.store.deleteMany({
+    await prismadb.store.delete({
       where: { id: params.storeId, userId: session.user.id },
     })
     return NextResponse.json({ message: "Store has been deleted successfully" }, { status: 200 })

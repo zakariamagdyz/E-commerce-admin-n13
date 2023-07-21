@@ -12,7 +12,7 @@ const MainNav = () => {
     {
       href: `/${params?.storeId}`,
       label: "Dashboard",
-      active: pathname.startsWith(`/${params?.storeId}`),
+      active: pathname === `/${params?.storeId}`,
     },
     {
       href: `/${params?.storeId}/settings`,
@@ -29,7 +29,7 @@ const MainNav = () => {
             href={route.href}
             className={cn(
               "text-sm font-medium transition-colors hover:text-primary",
-              route.active ? "text-black dark:text-white" : "text-muted-forground"
+              route.active ? "text-black dark:text-white" : "text-gray-600"
             )}
           >
             {route.label}
