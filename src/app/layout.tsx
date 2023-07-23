@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={InterFont.className}>
         <AuthProvider>
           {/* <ThemeProvider enableSystem attribute="class" defaultTheme="system"> */}
-          <ThemeProvider enableSystem attribute="class" defaultTheme="light">
+          <ThemeProvider enableSystem attribute="class" defaultTheme="system">
             <ToastProvider />
             <ModalProvider />
             {children}

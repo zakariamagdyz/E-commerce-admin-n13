@@ -72,10 +72,7 @@
   * {
     @apply border-border;
   }
-  html {
-    @apply scroll-smooth;
-  }
   body {
-    @apply bg-background text-foreground min-h-screen;
+    @apply bg-background text-foreground;
   }
 }

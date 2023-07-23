@@ -1,6 +1,6 @@
-import type { DefaultSeoProps } from "next-seo"
+// import type { DefaultSeoProps } from "next-seo"
 
-const config: DefaultSeoProps = {
+const config = {
   description: "Empowering Developers through Professional Videos and courses",
   defaultTitle: "Islam maboud (coderOne)",
   canonical: "https://coderOne.com",
@@ -16,8 +16,7 @@ const config: DefaultSeoProps = {
     url: "https://coderOne.com",
     title: "Islam maboud (coderOne)",
     siteName: "coderOne",
-    description:
-      "Empowering Developers through Professional Videos and courses",
+    description: "Empowering Developers through Professional Videos and courses",
     images: [
       {
         url: "http://coderOne.com/og.png",

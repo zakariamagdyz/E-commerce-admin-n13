@@ -9,7 +9,6 @@ module.exports = {
     // "plugin:jsx-a11y/recommended", // Turns on a11y rules for JSX.
     "plugin:tailwindcss/recommended",
     "plugin:@typescript-eslint/recommended", // Turns on rules from TypeScript-specific plugin.
-    "next",
     "eslint-config-prettier", // Turns off all rules that are unnecessary or might conflict with Prettier.
   ],
   plugins: [
