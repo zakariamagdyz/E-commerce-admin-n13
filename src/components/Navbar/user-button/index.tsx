@@ -120,14 +120,8 @@ function UserButton() {
           <LifeBuoy className="mr-2 h-4 w-4" />
           <span>Support</span>
         </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => setTheme(isLightMode ? "dark" : "light")}
-        >
-          {isLightMode ? (
-            <Moon className="mr-2 h-4 w-4" />
-          ) : (
-            <Sun className="mr-2 h-4 w-4" />
-          )}
+        <DropdownMenuItem onClick={() => setTheme(isLightMode ? "dark" : "light")}>
+          {isLightMode ? <Moon className="mr-2 h-4 w-4" /> : <Sun className="mr-2 h-4 w-4" />}
           <span>{isLightMode ? "Dark" : "Light"} mode</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />

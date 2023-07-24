@@ -5,14 +5,7 @@ import { toast } from "react-hot-toast"
 import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import Modal from "@/components/ui/modal"
 import { useStoreModal } from "@/hooks/use-store-modal"
@@ -70,11 +63,7 @@ function StoreModal() {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Ex: TV"
-                      {...field}
-                      disabled={form.formState.isSubmitting}
-                    />
+                    <Input placeholder="Ex: TV" {...field} disabled={form.formState.isSubmitting} />
                   </FormControl>
                   {/* <FormDescription>
                     This is your public display name.
@@ -84,12 +73,7 @@ function StoreModal() {
               )}
             />
             <div className="flex items-center justify-end space-x-2 pt-6">
-              <Button
-                variant="outline"
-                type="button"
-                disabled={form.formState.isSubmitting}
-                onClick={closeModal}
-              >
+              <Button variant="outline" type="button" disabled={form.formState.isSubmitting} onClick={closeModal}>
                 Cancel
               </Button>
               <Button type="submit" disabled={form.formState.isSubmitting}>

@@ -1,11 +1,6 @@
 "use client"
 import { Store } from "@prisma/client"
-import {
-  Check,
-  ChevronsUpDown,
-  PlusCircle,
-  Store as StoreIcon,
-} from "lucide-react"
+import { Check, ChevronsUpDown, PlusCircle, Store as StoreIcon } from "lucide-react"
 import { useParams, useRouter } from "next/navigation"
 import React, { useState } from "react"
 
@@ -68,20 +63,11 @@ function StoreSwitcher({ items = [] }: Props) {
             <CommandEmpty>No store found.</CommandEmpty>
             <CommandGroup heading="Stores">
               {formattedItems.map((item) => (
-                <CommandItem
-                  key={item.value}
-                  className="text-sm"
-                  onSelect={() => onStoreSelect(item)}
-                >
+                <CommandItem key={item.value} className="text-sm" onSelect={() => onStoreSelect(item)}>
                   <StoreIcon className="me-2 h-4 w-4 text-gray-500" />
                   {item.label}
                   <Check
-                    className={cn(
-                      "ms-auto h-4 w-4",
-                      selected?.value === item.value
-                        ? "opacity-100"
-                        : "opacity-0"
-                    )}
+                    className={cn("ms-auto h-4 w-4", selected?.value === item.value ? "opacity-100" : "opacity-0")}
                   />
                 </CommandItem>
               ))}
