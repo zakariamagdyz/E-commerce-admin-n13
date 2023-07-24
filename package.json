@@ -76,5 +76,5 @@
     "prettier-plugin-tailwind": "^2.2.12",
     "prettier-plugin-tailwindcss": "^0.3.0",
     "prisma": "^5.0.0"
-  }
+  }, "packageManager": "yarn@1.22.19"
 }
