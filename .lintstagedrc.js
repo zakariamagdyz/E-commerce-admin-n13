@@ -1,13 +1,11 @@
 const path = require("path")
 
 const buildEslintCommand = (filenames) =>
-  `next lint --max-warnings=1 --fix --file ${filenames
-    .map((f) =>
-      f !== ".lintstagedrc.js" ? path.relative(process.cwd(), f) : ""
-    )
+  `next lint --fix --file ${filenames
+    .map((f) => (f !== ".lintstagedrc.js" ? path.relative(process.cwd(), f) : ""))
     .join(" --file ")}`
 
 module.exports = {
-  "*": "prettier -uw --cache",
-  "**/*.{js,jsx,ts,tsx}": [buildEslintCommand],
+  "src/**/*.{js,jsx,ts,tsx,css,md,json}": "prettier -uw --cache",
+  "src/**/*.{js,jsx,ts,tsx}": [buildEslintCommand],
 }

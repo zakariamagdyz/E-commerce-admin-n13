@@ -17,7 +17,7 @@ on:
       - "*.md"
 
 jobs:
-  Type-Check:
+  Typecheck:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -29,11 +29,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install
       - name: Run Ts-type check
-        run: yarn type:check
+        run: yarn typecheck
 
-  Format-Check:
+  Format:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -45,11 +45,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install
       - name: Run Prettier check
         run: yarn format:check
 
-  Lint-Check:
+  Lint:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -61,11 +61,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install
       - name: Run Lint check
         run: yarn lint:check
 
-  Test-Check:
+  Test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -78,12 +78,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install
 
       - name: Run tests
         run: yarn test
 
-  build-Check:
+  Build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -95,7 +95,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install
 
       - name: Build
         run: yarn build
