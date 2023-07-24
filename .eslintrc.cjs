@@ -1,12 +1,11 @@
 module.exports = {
   root: true,
   extends: [
-    "eslint:recommended", // Eslint recommended configuration by eslint.
     "next/core-web-vitals", // Turns on rules for measuring and sending core web vitals.
-    // "plugin:import/recommended", // Linting of ES2015+ import/export syntax.
+    "plugin:import/recommended", // Linting of ES2015+ import/export syntax.
     // "plugin:react/recommended", // Recommended react linting configs.
     // "plugin:react-hooks/recommended", // Recommended react hooks linting configs.
-    // "plugin:jsx-a11y/recommended", // Turns on a11y rules for JSX.
+    "plugin:jsx-a11y/recommended", // Turns on a11y rules for JSX.
     "plugin:tailwindcss/recommended",
     "plugin:@typescript-eslint/recommended", // Turns on rules from TypeScript-specific plugin.
     "eslint-config-prettier", // Turns off all rules that are unnecessary or might conflict with Prettier.

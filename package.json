@@ -10,7 +10,7 @@
     "lint:fix": "next lint --fix --max-warnings=0",
     "format:check": "prettier . --check",
     "format": "prettier -uw .",
-    "type:check": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "test": "jest --passWithNoTests --bail ",
     "test:ci": "jest --coverage"
   },
