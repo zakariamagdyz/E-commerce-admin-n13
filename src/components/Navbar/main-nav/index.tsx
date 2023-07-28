@@ -20,6 +20,11 @@ const MainNav = () => {
       //   icon: <Settings className="mr-2 h-4 w-4" />,
       active: pathname.startsWith(`/${params?.storeId}/settings`),
     },
+    {
+      href: `/${params?.storeId}/billboards`,
+      label: "Billboards",
+      active: pathname.startsWith(`/${params?.storeId}/billboards`),
+    },
   ]
   return (
     <ul className="flex items-center space-x-4 lg:space-x-6">

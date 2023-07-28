@@ -2,10 +2,10 @@ import { NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
 import { z } from "zod"
 
+import { options } from "@/app/api/auth/[...nextauth]/options"
 import prismadb from "@/lib/prismadb"
 
-import { options } from "../../auth/[...nextauth]/options"
-import { patchBodySchema } from "../schema"
+import { bodySchema } from "../schema"
 
 export async function PATCH(req: Request, { params }: { params: { storeId: string } }) {
   try {
@@ -13,7 +13,7 @@ export async function PATCH(req: Request, { params }: { params: { storeId: strin
     const session = await getServerSession(options)
     if (!session?.user.id) {
       return NextResponse.json(
-        { message: "UnAuthorized" },
+        { message: "UnAuthenticated" },
         {
           status: 401,
         }
@@ -22,7 +22,7 @@ export async function PATCH(req: Request, { params }: { params: { storeId: strin
 
     // Check for body schema
     const body = await req.json()
-    const { name } = await patchBodySchema.parseAsync(body)
+    const { name } = await bodySchema.parseAsync(body)
 
     const store = await prismadb.store.update({
       where: { id: params.storeId, userId: session.user.id },
@@ -56,7 +56,7 @@ export async function DELETE(_req: Request, { params }: { params: { storeId: str
     const session = await getServerSession(options)
     if (!session?.user.id) {
       return NextResponse.json(
-        { message: "UnAuthorized" },
+        { message: "UnAuthenticated" },
         {
           status: 401,
         }
