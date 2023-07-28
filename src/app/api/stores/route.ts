@@ -2,10 +2,10 @@ import { NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
 import { z } from "zod"
 
+import { options } from "@/app/api/auth/[...nextauth]/options"
 import prismadb from "@/lib/prismadb"
 
-import { options } from "../auth/[...nextauth]/options"
-import { postBodySchema } from "./schema"
+import { bodySchema } from "./schema"
 
 export async function POST(req: Request) {
   try {
@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     const session = await getServerSession(options)
     if (!session?.user.id) {
       return NextResponse.json(
-        { message: "UnAuthorized" },
+        { message: "UnAuthenticated" },
         {
           status: 401,
         }
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
 
     // Check for body schema
     const body = await req.json()
-    const { name } = await postBodySchema.parseAsync(body)
+    const { name } = await bodySchema.parseAsync(body)
 
     const store = await prismadb.store.create({
       data: { name, userId: session.user.id },
