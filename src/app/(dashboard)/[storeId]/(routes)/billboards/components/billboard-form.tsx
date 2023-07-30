@@ -1,6 +1,7 @@
 "use client"
 import { billboard } from "@prisma/client"
 import { Trash } from "lucide-react"
+import { useParams } from "next/navigation"
 
 import AlertModal from "@/components/modals/alert-modal"
 import ApiAlert from "@/components/ui/api-alert"
@@ -20,9 +21,10 @@ type Props = {
 }
 
 export const BillboardForm = ({ initialData }: Props) => {
-  const deleteModal = useDeleteModal({ active: !!initialData })
-  const { form, onSubmit } = useBillboardForm(initialData)
   const origin = useOrigin()
+  const params = useParams() as { storeId: string; billboardId: string }
+  const deleteModal = useDeleteModal({ active: false, pushToBillboards: true, billboardId: params.billboardId })
+  const { form, onSubmit } = useBillboardForm(initialData)
 
   const title = initialData ? "Edit billboard" : "Create billboard"
   const description = initialData ? "Edit billboard" : "Create billboard"

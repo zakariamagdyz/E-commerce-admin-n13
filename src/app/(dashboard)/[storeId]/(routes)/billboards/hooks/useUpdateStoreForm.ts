@@ -18,6 +18,7 @@ export const useBillboardForm = (initialData: billboard | null) => {
   const { storeId, billboardId } = useParams() as { storeId: string; billboardId: string }
   const formInitialData = {
     label: initialData?.label || "",
+    imageUrl: initialData?.imageUrl || "",
   }
 
   const form = useForm<BillboardFormValues>({
@@ -25,7 +26,7 @@ export const useBillboardForm = (initialData: billboard | null) => {
     defaultValues: formInitialData,
   })
   const toastMessage = initialData ? "Billboard updated" : "Billboard created"
-  const url = initialData ? `/api/${storeId}/billboards/${billboardId}` : `/api/${storeId}/billboards/`
+  const url = initialData ? `/api/${storeId}/billboards/${billboardId}` : `/api/${storeId}/billboards`
   const method = initialData ? "PATCH" : "POST"
 
   const onSubmit = useCallback(
@@ -38,12 +39,13 @@ export const useBillboardForm = (initialData: billboard | null) => {
         const data = await res.json()
         if (!res.ok) throw new Error(data.message)
         router.refresh()
+        router.push(`/${storeId}/billboards`)
         toast.success(toastMessage)
       } catch (error) {
         if (error instanceof Error) toast.error(error.message)
       }
     },
-    [router, toastMessage, method, url]
+    [router, toastMessage, method, url, storeId]
   )
 
   return { form, onSubmit: form.handleSubmit(onSubmit) }

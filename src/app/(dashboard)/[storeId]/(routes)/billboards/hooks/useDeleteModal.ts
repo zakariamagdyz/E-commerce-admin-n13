@@ -2,11 +2,17 @@ import { useParams, useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
 
-export const useDeleteModal = ({ active }: { active: boolean }) => {
+type UseDeleteModal = {
+  active: boolean
+  pushToBillboards: boolean
+  billboardId: string
+}
+
+export const useDeleteModal = ({ active, pushToBillboards, billboardId }: UseDeleteModal) => {
   const [isOpen, setOpen] = useState(false)
   const [isLoading, setLoading] = useState(false)
   const router = useRouter()
-  const { storeId, billboardId } = useParams() as { storeId: string; billboardId?: string }
+  const { storeId } = useParams() as { storeId: string }
 
   if (!active) return null
 
@@ -20,8 +26,10 @@ export const useDeleteModal = ({ active }: { active: boolean }) => {
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.message)
-      // router.refresh()
-      router.push("/")
+
+      router.refresh()
+      if (pushToBillboards) router.push(`/${storeId}/billboards`)
+
       toast.success("Billboard deleted")
     } catch (error) {
       if (error instanceof Error) toast.error("Make sure you removed all categories useing this billboard")
