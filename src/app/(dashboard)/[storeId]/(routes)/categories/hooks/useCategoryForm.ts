@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Billboard } from "@prisma/client"
+import { Category } from "@prisma/client"
 import { useParams, useRouter } from "next/navigation"
 import { useCallback } from "react"
 import { useForm } from "react-hook-form"
@@ -7,30 +7,29 @@ import { toast } from "react-hot-toast"
 import { z } from "zod"
 
 const formSchema = z.object({
-  label: z.string().min(1),
-  imageUrl: z.string().url(),
+  name: z.string().min(1),
+  billboardId: z.string().min(12),
 })
+type CategroyFormValue = z.infer<typeof formSchema>
 
-type BillboardFormValues = z.infer<typeof formSchema>
-
-export const useBillboardForm = (initialData: Billboard | null) => {
+export const useCategoryForm = (initialData: Category | null) => {
   const router = useRouter()
   const { storeId, categoryId } = useParams() as { storeId: string; categoryId: string }
   const formInitialData = {
-    label: initialData?.label || "",
-    imageUrl: initialData?.imageUrl || "",
+    name: initialData?.name || "",
+    billboardId: initialData?.billboardId,
   }
 
-  const form = useForm<BillboardFormValues>({
+  const form = useForm<CategroyFormValue>({
     resolver: zodResolver(formSchema),
     defaultValues: formInitialData,
   })
-  const toastMessage = initialData ? "Billboard updated" : "Billboard created"
+  const toastMessage = initialData ? "Category updated" : "Category created"
   const url = initialData ? `/api/${storeId}/categories/${categoryId}` : `/api/${storeId}/categories`
   const method = initialData ? "PATCH" : "POST"
 
   const onSubmit = useCallback(
-    async (values: BillboardFormValues) => {
+    async (values: CategroyFormValue) => {
       try {
         const res = await fetch(url, {
           method,

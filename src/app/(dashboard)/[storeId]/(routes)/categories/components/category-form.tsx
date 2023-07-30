@@ -13,8 +13,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Separator } from "@/components/ui/separator"
 import useOrigin from "@/hooks/use-origin"
 
+import { useCategoryForm } from "../hooks/useCategoryForm"
 import { useDeleteModal } from "../hooks/useDeleteModal"
-import { useCategoryForm } from "../hooks/useUpdateStoreForm"
 
 type Props = {
   initialData: Category | null

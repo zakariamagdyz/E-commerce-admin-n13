@@ -30,7 +30,7 @@ export const useDeleteModal = ({ active, pushToCategories, categoryId }: UseDele
       router.refresh()
       if (pushToCategories) router.push(`/${storeId}/categories`)
 
-      toast.success("Billboard deleted")
+      toast.success("Category deleted")
     } catch (error) {
       if (error instanceof Error) toast.error("Make sure you removed all products useing this category first")
     } finally {

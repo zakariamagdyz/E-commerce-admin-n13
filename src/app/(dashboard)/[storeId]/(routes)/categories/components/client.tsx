@@ -31,7 +31,7 @@ export const CategoryClient = ({ categories }: Props) => {
       <DataTable columns={columns} data={categories} searchKey="name" />
       <Heading title="API" description="API calls for Billboards " />
       <Separator className="my-4" />
-      <ApiList entityName="categories" entityIdName="billboardId" />
+      <ApiList entityName="categories" entityIdName="categoryId" />
     </section>
   )
 }

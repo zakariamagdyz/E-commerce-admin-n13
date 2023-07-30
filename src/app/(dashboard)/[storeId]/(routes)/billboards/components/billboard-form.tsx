@@ -13,8 +13,8 @@ import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import useOrigin from "@/hooks/use-origin"
 
+import { useBillboardForm } from "../hooks/useBillboardForm"
 import { useDeleteModal } from "../hooks/useDeleteModal"
-import { useBillboardForm } from "../hooks/useUpdateStoreForm"
 
 type Props = {
   initialData: Billboard | null

@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Category } from "@prisma/client"
+import { Billboard } from "@prisma/client"
 import { useParams, useRouter } from "next/navigation"
 import { useCallback } from "react"
 import { useForm } from "react-hook-form"
@@ -7,18 +7,18 @@ import { toast } from "react-hot-toast"
 import { z } from "zod"
 
 const formSchema = z.object({
-  name: z.string().min(1),
-  billboardId: z.string().min(12),
+  label: z.string().min(1),
+  imageUrl: z.string().url(),
 })
 
 type BillboardFormValues = z.infer<typeof formSchema>
 
-export const useCategoryForm = (initialData: Category | null) => {
+export const useBillboardForm = (initialData: Billboard | null) => {
   const router = useRouter()
   const { storeId, billboardId } = useParams() as { storeId: string; billboardId: string }
   const formInitialData = {
-    name: initialData?.name,
-    billboardId: initialData?.billboardId,
+    label: initialData?.label || "",
+    imageUrl: initialData?.imageUrl || "",
   }
 
   const form = useForm<BillboardFormValues>({
@@ -39,7 +39,7 @@ export const useCategoryForm = (initialData: Category | null) => {
         const data = await res.json()
         if (!res.ok) throw new Error(data.message)
         router.refresh()
-        router.push(`/${storeId}/categories`)
+        router.push(`/${storeId}/billboards`)
         toast.success(toastMessage)
       } catch (error) {
         if (error instanceof Error) toast.error(error.message)

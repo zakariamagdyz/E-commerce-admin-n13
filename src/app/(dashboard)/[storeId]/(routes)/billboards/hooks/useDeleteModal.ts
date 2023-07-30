@@ -21,14 +21,14 @@ export const useDeleteModal = ({ active, pushToBillboards, billboardId }: UseDel
   const onConfirm = async () => {
     setLoading(true)
     try {
-      const res = await fetch(`/api/${storeId}/categories/${billboardId}`, {
+      const res = await fetch(`/api/${storeId}/billboards/${billboardId}`, {
         method: "DELETE",
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.message)
 
       router.refresh()
-      if (pushToBillboards) router.push(`/${storeId}/categories`)
+      if (pushToBillboards) router.push(`/${storeId}/billboards`)
 
       toast.success("Billboard deleted")
     } catch (error) {
