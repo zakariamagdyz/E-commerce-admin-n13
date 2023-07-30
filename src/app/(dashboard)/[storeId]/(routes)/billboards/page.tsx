@@ -1,4 +1,5 @@
 import { format } from "date-fns"
+import { Metadata } from "next"
 import React from "react"
 
 import prismadb from "@/lib/prismadb"
@@ -7,6 +8,11 @@ import { BillboardClient } from "./components/client"
 import { BillboardColumn } from "./components/columns"
 
 type Params = { params: { storeId: string } }
+
+export const metadata: Metadata = {
+  title: "Billboards",
+  description: "Store billboards",
+}
 
 async function BillboardPage({ params }: Params) {
   const billboards = await prismadb.billboard.findMany({

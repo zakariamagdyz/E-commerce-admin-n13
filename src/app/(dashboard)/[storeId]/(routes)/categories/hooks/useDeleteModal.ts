@@ -4,11 +4,11 @@ import { toast } from "react-hot-toast"
 
 type UseDeleteModal = {
   active: boolean
-  pushToBillboards: boolean
-  billboardId: string
+  pushToCategories: boolean
+  categoryId: string
 }
 
-export const useDeleteModal = ({ active, pushToBillboards, billboardId }: UseDeleteModal) => {
+export const useDeleteModal = ({ active, pushToCategories, categoryId }: UseDeleteModal) => {
   const [isOpen, setOpen] = useState(false)
   const [isLoading, setLoading] = useState(false)
   const router = useRouter()
@@ -21,18 +21,18 @@ export const useDeleteModal = ({ active, pushToBillboards, billboardId }: UseDel
   const onConfirm = async () => {
     setLoading(true)
     try {
-      const res = await fetch(`/api/${storeId}/categories/${billboardId}`, {
+      const res = await fetch(`/api/${storeId}/categories/${categoryId}`, {
         method: "DELETE",
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.message)
 
       router.refresh()
-      if (pushToBillboards) router.push(`/${storeId}/categories`)
+      if (pushToCategories) router.push(`/${storeId}/categories`)
 
       toast.success("Billboard deleted")
     } catch (error) {
-      if (error instanceof Error) toast.error("Make sure you removed all products useing this billboard")
+      if (error instanceof Error) toast.error("Make sure you removed all products useing this category first")
     } finally {
       setLoading(false)
       onClose()

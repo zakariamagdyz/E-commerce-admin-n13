@@ -1,5 +1,5 @@
 "use client"
-import { Billboard } from "@prisma/client"
+import { Billboard, Category } from "@prisma/client"
 import { Trash } from "lucide-react"
 import { useParams } from "next/navigation"
 
@@ -8,26 +8,27 @@ import ApiAlert from "@/components/ui/api-alert"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Heading } from "@/components/ui/heading"
-import ImageUpload from "@/components/ui/image-upload"
 import { Input } from "@/components/ui/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import useOrigin from "@/hooks/use-origin"
 
 import { useDeleteModal } from "../hooks/useDeleteModal"
-import { useBillboardForm } from "../hooks/useUpdateStoreForm"
+import { useCategoryForm } from "../hooks/useUpdateStoreForm"
 
 type Props = {
-  initialData: Billboard | null
+  initialData: Category | null
+  billboards: Billboard[]
 }
 
-export const BillboardForm = ({ initialData }: Props) => {
+export const CategoryForm = ({ initialData, billboards }: Props) => {
   const origin = useOrigin()
-  const params = useParams() as { storeId: string; billboardId: string }
-  const deleteModal = useDeleteModal({ active: false, pushToBillboards: true, billboardId: params.billboardId })
-  const { form, onSubmit } = useBillboardForm(initialData)
+  const params = useParams() as { storeId: string; categoryId: string }
+  const deleteModal = useDeleteModal({ active: false, pushToCategories: true, categoryId: params.categoryId })
+  const { form, onSubmit } = useCategoryForm(initialData)
 
-  const title = initialData ? "Edit billboard" : "Create billboard"
-  const description = initialData ? "Edit billboard" : "Create billboard"
+  const title = initialData ? "Edit category" : "Create category"
+  const description = initialData ? "Edit category" : "Create category"
   const action = initialData ? "Save changes" : "Create"
 
   return (
@@ -43,35 +44,46 @@ export const BillboardForm = ({ initialData }: Props) => {
       <Separator />
       <Form {...form}>
         <form className="w-full space-y-8" onSubmit={onSubmit}>
-          <FormField
-            control={form.control}
-            name="imageUrl"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Background image</FormLabel>
-                <FormControl>
-                  <ImageUpload
-                    value={field.value ? [field.value] : []}
-                    disabled={form.formState.isSubmitting}
-                    onChange={(url) => field.onChange(url)}
-                    onRemove={() => field.onChange("")}
-                  />
-                </FormControl>
-
-                <FormMessage className="ms-2 text-xs " />
-              </FormItem>
-            )}
-          />
           <div className="grid grid-cols-3 gap-8">
             <FormField
               control={form.control}
-              name="label"
+              name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Label</FormLabel>
+                  <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input disabled={form.formState.isSubmitting} placeholder="Store name" {...field} />
+                    <Input disabled={form.formState.isSubmitting} placeholder="Category name" {...field} />
                   </FormControl>
+
+                  <FormMessage className="ms-2 text-xs " />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="billboardId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Billboard</FormLabel>
+                  <Select
+                    defaultValue={field.value}
+                    value={field.value}
+                    disabled={form.formState.isSubmitting}
+                    onValueChange={field.onChange}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a billboard" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {billboards.map((billboard) => (
+                        <SelectItem key={billboard.id} value={billboard.id}>
+                          {billboard.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
 
                   <FormMessage className="ms-2 text-xs " />
                 </FormItem>

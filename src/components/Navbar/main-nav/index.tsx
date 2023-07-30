@@ -11,19 +11,25 @@ const MainNav = () => {
   const routes = [
     {
       href: `/${params?.storeId}`,
-      label: "Dashboard",
+      label: "Overview",
       active: pathname === `/${params?.storeId}`,
+    },
+
+    {
+      href: `/${params?.storeId}/billboards`,
+      label: "Billboards",
+      active: pathname.startsWith(`/${params?.storeId}/billboards`),
+    },
+    {
+      href: `/${params?.storeId}/categories`,
+      label: "Categories",
+      active: pathname.startsWith(`/${params?.storeId}/categories`),
     },
     {
       href: `/${params?.storeId}/settings`,
       label: "Settings",
       //   icon: <Settings className="mr-2 h-4 w-4" />,
       active: pathname.startsWith(`/${params?.storeId}/settings`),
-    },
-    {
-      href: `/${params?.storeId}/billboards`,
-      label: "Billboards",
-      active: pathname.startsWith(`/${params?.storeId}/billboards`),
     },
   ]
   return (
