@@ -41,6 +41,11 @@ const MainNav = () => {
       active: pathname.startsWith(`/${params?.storeId}/products`),
     },
     {
+      href: `/${params?.storeId}/orders`,
+      label: "Orders",
+      active: pathname.startsWith(`/${params?.storeId}/orders`),
+    },
+    {
       href: `/${params?.storeId}/settings`,
       label: "Settings",
       //   icon: <Settings className="mr-2 h-4 w-4" />,
