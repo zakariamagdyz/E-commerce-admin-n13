@@ -1,5 +1,5 @@
 "use client"
-import { Size } from "@prisma/client"
+import { Color } from "@prisma/client"
 import { Trash } from "lucide-react"
 import { useParams } from "next/navigation"
 
@@ -12,21 +12,21 @@ import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import useOrigin from "@/hooks/use-origin"
 
+import { useColorForm } from "../hooks/useColorForm"
 import { useDeleteModal } from "../hooks/useDeleteModal"
-import { useSizeForm } from "../hooks/useSizeForm"
 
 type Props = {
-  initialData: Size | null
+  initialData: Color | null
 }
 
-export const SizeForm = ({ initialData }: Props) => {
+export const ColorForm = ({ initialData }: Props) => {
   const origin = useOrigin()
-  const params = useParams() as { storeId: string; sizeId: string }
-  const deleteModal = useDeleteModal({ active: !!initialData, pushToSizes: true, sizeId: params.sizeId })
-  const { form, onSubmit } = useSizeForm(initialData)
+  const params = useParams() as { storeId: string; colorId: string }
+  const deleteModal = useDeleteModal({ active: !!initialData, pushToColors: true, colorId: params.colorId })
+  const { form, onSubmit } = useColorForm(initialData)
 
-  const title = initialData ? "Edit Size" : "Create Size"
-  const description = initialData ? "Edit Size" : "Create Size"
+  const title = initialData ? "Edit Color" : "Create Color"
+  const description = initialData ? "Edit Color" : "Create Color"
   const action = initialData ? "Save changes" : "Create"
 
   return (
@@ -50,7 +50,7 @@ export const SizeForm = ({ initialData }: Props) => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input disabled={form.formState.isSubmitting} placeholder="Size name" {...field} />
+                    <Input disabled={form.formState.isSubmitting} placeholder="Color name" {...field} />
                   </FormControl>
 
                   <FormMessage className="ms-2 text-xs " />
@@ -64,7 +64,7 @@ export const SizeForm = ({ initialData }: Props) => {
                 <FormItem>
                   <FormLabel>Value</FormLabel>
                   <FormControl>
-                    <Input disabled={form.formState.isSubmitting} placeholder="Size value" {...field} />
+                    <Input disabled={form.formState.isSubmitting} placeholder="Color value" {...field} />
                   </FormControl>
 
                   <FormMessage className="ms-2 text-xs " />

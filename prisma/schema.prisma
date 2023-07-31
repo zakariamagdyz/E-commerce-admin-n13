@@ -68,6 +68,7 @@ model Store {
   billboards Billboard[]
   Category   Category[]
   Size       Size[]
+  Color      Color[]
 }
 
 model Billboard {
@@ -93,6 +94,16 @@ model Category {
 }
 
 model Size {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  store     Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  storeId   String   @db.ObjectId
+  name      String
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Color {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   store     Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
   storeId   String   @db.ObjectId

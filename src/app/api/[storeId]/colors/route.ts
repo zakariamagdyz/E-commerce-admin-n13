@@ -36,12 +36,12 @@ export async function GET(_: Request, { params }: Params) {
       )
     }
 
-    const billboards = await prismadb.billboard.findMany({
+    const colors = await prismadb.color.findMany({
       where: { storeId: params.storeId },
     })
-    return NextResponse.json(billboards)
+    return NextResponse.json(colors)
   } catch (error) {
-    console.log("[CATEGORIES_GET]", error)
+    console.log("[COLORS_GET]", error)
     return NextResponse.json(
       { message: "Something went wrong" },
       {
@@ -66,7 +66,7 @@ export async function POST(req: Request, { params }: Params) {
 
     // Check for body schema
     const body = await req.json()
-    const { name, billboardId } = await bodySchema.parseAsync(body)
+    const { name, value } = await bodySchema.parseAsync(body)
 
     // Check if user owns the store
     const store = await prismadb.store.findFirst({
@@ -82,10 +82,10 @@ export async function POST(req: Request, { params }: Params) {
       )
     }
 
-    const category = await prismadb.category.create({
-      data: { name, billboardId, storeId: params.storeId },
+    const billboard = await prismadb.color.create({
+      data: { name, value, storeId: params.storeId },
     })
-    return NextResponse.json(category)
+    return NextResponse.json(billboard)
   } catch (error) {
     // Check for Schema error
     if (error instanceof z.ZodError) {
@@ -96,7 +96,7 @@ export async function POST(req: Request, { params }: Params) {
         }
       )
     }
-    console.log("[CATEGORIES_POST]", error)
+    console.log("[COLORS_POST]", error)
     return NextResponse.json(
       { message: "Something went wrong" },
       {

@@ -5,11 +5,11 @@ import { z } from "zod"
 import { options } from "@/app/api/auth/[...nextauth]/options"
 import prismadb from "@/lib/prismadb"
 
-import { bodySchema } from "./schema"
+import { bodySchema } from "../schema"
 
-type Params = { params: { storeId: string } }
+type Params = { params: { storeId: string; colorId: string } }
 
-export async function GET(_: Request, { params }: Params) {
+export async function GET(_req: Request, { params }: Params) {
   try {
     // Check for Auth
     const session = await getServerSession(options)
@@ -36,12 +36,12 @@ export async function GET(_: Request, { params }: Params) {
       )
     }
 
-    const billboards = await prismadb.billboard.findMany({
-      where: { storeId: params.storeId },
+    const color = await prismadb.color.findUnique({
+      where: { id: params.colorId },
     })
-    return NextResponse.json(billboards)
+    return NextResponse.json(color)
   } catch (error) {
-    console.log("[CATEGORIES_GET]", error)
+    console.log("[COLOR_GET]", error)
     return NextResponse.json(
       { message: "Something went wrong" },
       {
@@ -51,7 +51,7 @@ export async function GET(_: Request, { params }: Params) {
   }
 }
 
-export async function POST(req: Request, { params }: Params) {
+export async function PATCH(req: Request, { params }: Params) {
   try {
     // Check for Auth
     const session = await getServerSession(options)
@@ -66,7 +66,7 @@ export async function POST(req: Request, { params }: Params) {
 
     // Check for body schema
     const body = await req.json()
-    const { name, billboardId } = await bodySchema.parseAsync(body)
+    const { name, value } = await bodySchema.partial({ name: true, value: true }).parseAsync(body)
 
     // Check if user owns the store
     const store = await prismadb.store.findFirst({
@@ -82,10 +82,12 @@ export async function POST(req: Request, { params }: Params) {
       )
     }
 
-    const category = await prismadb.category.create({
-      data: { name, billboardId, storeId: params.storeId },
+    const color = await prismadb.color.update({
+      where: { id: params.colorId },
+      data: { value, name },
     })
-    return NextResponse.json(category)
+
+    return NextResponse.json(color)
   } catch (error) {
     // Check for Schema error
     if (error instanceof z.ZodError) {
@@ -96,7 +98,49 @@ export async function POST(req: Request, { params }: Params) {
         }
       )
     }
-    console.log("[CATEGORIES_POST]", error)
+    console.log("[COLOR_PATCH]", error)
+    return NextResponse.json(
+      { message: "Something went wrong" },
+      {
+        status: 500,
+      }
+    )
+  }
+}
+
+export async function DELETE(_req: Request, { params }: Params) {
+  try {
+    // Check for Auth
+    const session = await getServerSession(options)
+    if (!session?.user.id) {
+      return NextResponse.json(
+        { message: "UnAuthenticated" },
+        {
+          status: 401,
+        }
+      )
+    }
+
+    // Check if user owns the store
+    const store = await prismadb.store.findFirst({
+      where: { id: params.storeId, userId: session.user.id },
+    })
+
+    if (!store) {
+      return NextResponse.json(
+        { message: "UnAuthorized" },
+        {
+          status: 403,
+        }
+      )
+    }
+
+    await prismadb.color.delete({
+      where: { id: params.colorId },
+    })
+    return NextResponse.json({ message: "Size has been deleted successfully" }, { status: 200 })
+  } catch (error) {
+    console.log("[COLOR_DELETE]", error)
     return NextResponse.json(
       { message: "Something went wrong" },
       {

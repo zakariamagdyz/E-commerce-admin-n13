@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Size } from "@prisma/client"
+import { Color } from "@prisma/client"
 import { useParams, useRouter } from "next/navigation"
 import { useCallback } from "react"
 import { useForm } from "react-hook-form"
@@ -11,26 +11,26 @@ const formSchema = z.object({
   value: z.string().min(1),
 })
 
-type SizeFormValue = z.infer<typeof formSchema>
+type ColorFormValue = z.infer<typeof formSchema>
 
-export const useSizeForm = (initialData: Size | null) => {
+export const useColorForm = (initialData: Color | null) => {
   const router = useRouter()
-  const { storeId, sizeId } = useParams() as { storeId: string; sizeId: string }
+  const { storeId, colorId } = useParams() as { storeId: string; colorId: string }
   const formInitialData = {
     name: initialData?.name || "",
     value: initialData?.value || "",
   }
 
-  const form = useForm<SizeFormValue>({
+  const form = useForm<ColorFormValue>({
     resolver: zodResolver(formSchema),
     defaultValues: formInitialData,
   })
-  const toastMessage = initialData ? "Size updated" : "Size created"
-  const url = initialData ? `/api/${storeId}/sizes/${sizeId}` : `/api/${storeId}/sizes`
+  const toastMessage = initialData ? "Color updated" : "Color created"
+  const url = initialData ? `/api/${storeId}/colors/${colorId}` : `/api/${storeId}/colors`
   const method = initialData ? "PATCH" : "POST"
 
   const onSubmit = useCallback(
-    async (values: SizeFormValue) => {
+    async (values: ColorFormValue) => {
       try {
         const res = await fetch(url, {
           method,
@@ -39,7 +39,7 @@ export const useSizeForm = (initialData: Size | null) => {
         const data = await res.json()
         if (!res.ok) throw new Error(data.message)
         router.refresh()
-        router.push(`/${storeId}/sizes`)
+        router.push(`/${storeId}/colors`)
         toast.success(toastMessage)
       } catch (error) {
         if (error instanceof Error) toast.error(error.message)

@@ -41,7 +41,7 @@ export async function GET(_: Request, { params }: Params) {
     })
     return NextResponse.json(sizes)
   } catch (error) {
-    console.log("[SIZES_POST]", error)
+    console.log("[SIZES_GET]", error)
     return NextResponse.json(
       { message: "Something went wrong" },
       {
