@@ -31,10 +31,8 @@ async function CategoryFormPage({ params }: Props) {
   })
 
   return (
-    <main className="flex-col">
-      <section className="flex-1 space-y-4 p-8 pt-6">
-        <CategoryForm initialData={category} billboards={billboards} />
-      </section>
+    <main className="container py-6">
+      <CategoryForm initialData={category} billboards={billboards} />
     </main>
   )
 }

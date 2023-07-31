@@ -30,7 +30,7 @@ export const ColorForm = ({ initialData }: Props) => {
   const action = initialData ? "Save changes" : "Create"
 
   return (
-    <>
+    <section className="space-y-4">
       <div className="flex items-center justify-between">
         <Heading title={title} description={description} />
         {deleteModal && (
@@ -66,7 +66,9 @@ export const ColorForm = ({ initialData }: Props) => {
                   <FormControl>
                     <div className="flex items-center gap-x-4">
                       <Input disabled={form.formState.isSubmitting} placeholder="Color value" {...field} />
-                      <div className="rounded-full border p-4" style={{ backgroundColor: field.value }}></div>
+                      {field.value && (
+                        <div className="rounded-full border p-4" style={{ backgroundColor: field.value }}></div>
+                      )}
                     </div>
                   </FormControl>
 
@@ -91,6 +93,6 @@ export const ColorForm = ({ initialData }: Props) => {
       )}
       <Separator />
       <ApiAlert title="NEXT_PUBLIC_API_URL" description={`${origin}/api/${initialData?.id || ""}`} variant="public" />
-    </>
+    </section>
   )
 }

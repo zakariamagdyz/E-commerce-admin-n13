@@ -25,10 +25,8 @@ async function SizeFormPage({ params }: Props) {
   const size = await findSizeById(params.sizeId)
 
   return (
-    <main className="flex-col">
-      <section className="flex-1 space-y-4 p-8 pt-6">
-        <SizeForm initialData={size} />
-      </section>
+    <main className="container py-6">
+      <SizeForm initialData={size} />
     </main>
   )
 }

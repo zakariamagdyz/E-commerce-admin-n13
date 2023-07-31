@@ -25,10 +25,8 @@ async function ColorFormpage({ params }: Props) {
   const color = await findColorById(params.colorId)
 
   return (
-    <main className="flex-col">
-      <section className="flex-1 space-y-4 p-8 pt-6">
-        <ColorForm initialData={color} />
-      </section>
+    <main className="container py-6">
+      <ColorForm initialData={color} />
     </main>
   )
 }

@@ -25,7 +25,7 @@ async function page({ params }: Props) {
   const user = await checkForSession()
   const store = await getStoreApi(params.storeId, user.id)
 
-  return <main className="container">{store?.name}</main>
+  return <main className="container py-8">{store?.name}</main>
 }
 
 export default page

@@ -31,10 +31,8 @@ async function SettingsPage({ params }: Props) {
   if (!store) redirect("/")
 
   return (
-    <main className="container flex-col">
-      <section className="flex-1 space-y-4 pt-6">
-        <SettingsForm initialData={store} />
-      </section>
+    <main className="container py-6">
+      <SettingsForm initialData={store} />
     </main>
   )
 }

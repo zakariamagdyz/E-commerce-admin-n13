@@ -30,11 +30,9 @@ async function BillboardPage({ params }: Params) {
     createdAt: format(item.createdAt, "MMM do, yyyy"),
   }))
   return (
-    <div className="flex-col">
-      <div className="flex-1 space-y-4 p-8 pt-6">
-        <BillboardClient billboards={formatedBillboards} />
-      </div>
-    </div>
+    <main className="container py-6">
+      <BillboardClient billboards={formatedBillboards} />
+    </main>
   )
 }
 

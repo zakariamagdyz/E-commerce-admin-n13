@@ -32,7 +32,7 @@ export const CategoryForm = ({ initialData, billboards }: Props) => {
   const action = initialData ? "Save changes" : "Create"
 
   return (
-    <>
+    <section className="space-y-4">
       <div className="flex items-center justify-between">
         <Heading title={title} description={description} />
         {deleteModal && (
@@ -106,6 +106,6 @@ export const CategoryForm = ({ initialData, billboards }: Props) => {
       )}
       <Separator />
       <ApiAlert title="NEXT_PUBLIC_API_URL" description={`${origin}/api/${initialData?.id || ""}`} variant="public" />
-    </>
+    </section>
   )
 }

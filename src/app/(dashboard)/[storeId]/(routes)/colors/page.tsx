@@ -31,11 +31,9 @@ async function ColorsPage({ params }: Params) {
     createdAt: format(item.createdAt, "MMM do, yyyy"),
   }))
   return (
-    <div className="flex-col">
-      <div className="flex-1 space-y-4 p-8 pt-6">
-        <ColorClient colors={fromatedColors} />
-      </div>
-    </div>
+    <main className="container py-6">
+      <ColorClient colors={fromatedColors} />
+    </main>
   )
 }
 
