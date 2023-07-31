@@ -8,7 +8,10 @@ import { z } from "zod"
 
 const formSchema = z.object({
   name: z.string().min(1),
-  value: z.string().min(1),
+  value: z
+    .string()
+    .min(1)
+    .regex(/^#[0-9A-F]{6}$/i, { message: "String must be a valid hex code" }),
 })
 
 type ColorFormValue = z.infer<typeof formSchema>
