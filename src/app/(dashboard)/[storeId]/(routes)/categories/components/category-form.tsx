@@ -24,7 +24,7 @@ type Props = {
 export const CategoryForm = ({ initialData, billboards }: Props) => {
   const origin = useOrigin()
   const params = useParams() as { storeId: string; categoryId: string }
-  const deleteModal = useDeleteModal({ active: false, pushToCategories: true, categoryId: params.categoryId })
+  const deleteModal = useDeleteModal({ active: !!initialData, pushToCategories: true, categoryId: params.categoryId })
   const { form, onSubmit } = useCategoryForm(initialData)
 
   const title = initialData ? "Edit category" : "Create category"

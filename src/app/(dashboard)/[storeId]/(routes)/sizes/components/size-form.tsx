@@ -1,5 +1,5 @@
 "use client"
-import { Billboard } from "@prisma/client"
+import { Size } from "@prisma/client"
 import { Trash } from "lucide-react"
 import { useParams } from "next/navigation"
 
@@ -8,26 +8,25 @@ import ApiAlert from "@/components/ui/api-alert"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Heading } from "@/components/ui/heading"
-import ImageUpload from "@/components/ui/image-upload"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import useOrigin from "@/hooks/use-origin"
 
-import { useBillboardForm } from "../hooks/useBillboardForm"
 import { useDeleteModal } from "../hooks/useDeleteModal"
+import { useSizeForm } from "../hooks/useSizeForm"
 
 type Props = {
-  initialData: Billboard | null
+  initialData: Size | null
 }
 
-export const BillboardForm = ({ initialData }: Props) => {
+export const SizeForm = ({ initialData }: Props) => {
   const origin = useOrigin()
-  const params = useParams() as { storeId: string; billboardId: string }
-  const deleteModal = useDeleteModal({ active: !!initialData, pushToBillboards: true, billboardId: params.billboardId })
-  const { form, onSubmit } = useBillboardForm(initialData)
+  const params = useParams() as { storeId: string; sizeId: string }
+  const deleteModal = useDeleteModal({ active: !!initialData, pushToSizes: true, sizeId: params.sizeId })
+  const { form, onSubmit } = useSizeForm(initialData)
 
-  const title = initialData ? "Edit billboard" : "Create billboard"
-  const description = initialData ? "Edit billboard" : "Create billboard"
+  const title = initialData ? "Edit Size" : "Create Size"
+  const description = initialData ? "Edit Size" : "Create Size"
   const action = initialData ? "Save changes" : "Create"
 
   return (
@@ -43,34 +42,29 @@ export const BillboardForm = ({ initialData }: Props) => {
       <Separator />
       <Form {...form}>
         <form className="w-full space-y-8" onSubmit={onSubmit}>
-          <FormField
-            control={form.control}
-            name="imageUrl"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Background image</FormLabel>
-                <FormControl>
-                  <ImageUpload
-                    value={field.value ? [field.value] : []}
-                    disabled={form.formState.isSubmitting}
-                    onChange={(url) => field.onChange(url)}
-                    onRemove={() => field.onChange("")}
-                  />
-                </FormControl>
-
-                <FormMessage className="ms-2 text-xs " />
-              </FormItem>
-            )}
-          />
-          <div className="grid grid-cols-3 gap-8">
+          <div className="flex gap-8">
             <FormField
               control={form.control}
-              name="label"
+              name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Label</FormLabel>
+                  <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input disabled={form.formState.isSubmitting} placeholder="Store name" {...field} />
+                    <Input disabled={form.formState.isSubmitting} placeholder="Size name" {...field} />
+                  </FormControl>
+
+                  <FormMessage className="ms-2 text-xs " />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="value"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Value</FormLabel>
+                  <FormControl>
+                    <Input disabled={form.formState.isSubmitting} placeholder="Size value" {...field} />
                   </FormControl>
 
                   <FormMessage className="ms-2 text-xs " />

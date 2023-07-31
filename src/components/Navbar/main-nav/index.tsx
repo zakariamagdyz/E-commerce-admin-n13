@@ -26,6 +26,11 @@ const MainNav = () => {
       active: pathname.startsWith(`/${params?.storeId}/categories`),
     },
     {
+      href: `/${params?.storeId}/sizes`,
+      label: "Sizes",
+      active: pathname.startsWith(`/${params?.storeId}/sizes`),
+    },
+    {
       href: `/${params?.storeId}/settings`,
       label: "Settings",
       //   icon: <Settings className="mr-2 h-4 w-4" />,
@@ -40,7 +45,8 @@ const MainNav = () => {
             href={route.href}
             className={cn(
               "text-sm font-medium transition-colors hover:text-primary",
-              route.active ? "text-black dark:text-white" : "text-gray-600"
+              route.active ? "text-black dark:text-white" : "text-gray-600",
+              { "text-lg": route.active }
             )}
           >
             {route.label}
