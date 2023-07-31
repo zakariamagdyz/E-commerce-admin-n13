@@ -1,6 +1,7 @@
 "use client"
-import { billboard } from "@prisma/client"
+import { Billboard } from "@prisma/client"
 import { Trash } from "lucide-react"
+import { useParams } from "next/navigation"
 
 import AlertModal from "@/components/modals/alert-modal"
 import ApiAlert from "@/components/ui/api-alert"
@@ -12,24 +13,25 @@ import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import useOrigin from "@/hooks/use-origin"
 
+import { useBillboardForm } from "../hooks/useBillboardForm"
 import { useDeleteModal } from "../hooks/useDeleteModal"
-import { useBillboardForm } from "../hooks/useUpdateStoreForm"
 
 type Props = {
-  initialData: billboard | null
+  initialData: Billboard | null
 }
 
 export const BillboardForm = ({ initialData }: Props) => {
-  const deleteModal = useDeleteModal({ active: !!initialData })
-  const { form, onSubmit } = useBillboardForm(initialData)
   const origin = useOrigin()
+  const params = useParams() as { storeId: string; billboardId: string }
+  const deleteModal = useDeleteModal({ active: !!initialData, pushToBillboards: true, billboardId: params.billboardId })
+  const { form, onSubmit } = useBillboardForm(initialData)
 
   const title = initialData ? "Edit billboard" : "Create billboard"
   const description = initialData ? "Edit billboard" : "Create billboard"
   const action = initialData ? "Save changes" : "Create"
 
   return (
-    <>
+    <section className="space-y-4">
       <div className="flex items-center justify-between">
         <Heading title={title} description={description} />
         {deleteModal && (
@@ -91,7 +93,7 @@ export const BillboardForm = ({ initialData }: Props) => {
         />
       )}
       <Separator />
-      <ApiAlert title="NEXT_PUBLIC_API_URL" description={`${origin}/api/${initialData?.id}`} variant="public" />
-    </>
+      <ApiAlert title="NEXT_PUBLIC_API_URL" description={`${origin}/api/${initialData?.id || ""}`} variant="public" />
+    </section>
   )
 }

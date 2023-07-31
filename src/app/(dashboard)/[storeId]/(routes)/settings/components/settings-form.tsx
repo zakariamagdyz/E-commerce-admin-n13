@@ -33,7 +33,7 @@ export const SettingsForm = ({ initialData }: Props) => {
       </div>
       <Separator />
       <Form {...form}>
-        <form className="w-full space-y-8" onSubmit={onSubmit}>
+        <form className="mb-3 w-full space-y-8" onSubmit={onSubmit}>
           <div className="grid grid-cols-3 gap-8">
             <FormField
               control={form.control}

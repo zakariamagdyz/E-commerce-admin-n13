@@ -11,19 +11,40 @@ const MainNav = () => {
   const routes = [
     {
       href: `/${params?.storeId}`,
-      label: "Dashboard",
+      label: "Overview",
       active: pathname === `/${params?.storeId}`,
+    },
+
+    {
+      href: `/${params?.storeId}/billboards`,
+      label: "Billboards",
+      active: pathname.startsWith(`/${params?.storeId}/billboards`),
+    },
+    {
+      href: `/${params?.storeId}/categories`,
+      label: "Categories",
+      active: pathname.startsWith(`/${params?.storeId}/categories`),
+    },
+    {
+      href: `/${params?.storeId}/sizes`,
+      label: "Sizes",
+      active: pathname.startsWith(`/${params?.storeId}/sizes`),
+    },
+    {
+      href: `/${params?.storeId}/colors`,
+      label: "Colors",
+      active: pathname.startsWith(`/${params?.storeId}/colors`),
+    },
+    {
+      href: `/${params?.storeId}/products`,
+      label: "Products",
+      active: pathname.startsWith(`/${params?.storeId}/products`),
     },
     {
       href: `/${params?.storeId}/settings`,
       label: "Settings",
       //   icon: <Settings className="mr-2 h-4 w-4" />,
       active: pathname.startsWith(`/${params?.storeId}/settings`),
-    },
-    {
-      href: `/${params?.storeId}/billboards`,
-      label: "Billboards",
-      active: pathname.startsWith(`/${params?.storeId}/billboards`),
     },
   ]
   return (
@@ -34,7 +55,8 @@ const MainNav = () => {
             href={route.href}
             className={cn(
               "text-sm font-medium transition-colors hover:text-primary",
-              route.active ? "text-black dark:text-white" : "text-gray-600"
+              route.active ? "text-black dark:text-white" : "text-gray-600",
+              { "text-lg": route.active }
             )}
           >
             {route.label}

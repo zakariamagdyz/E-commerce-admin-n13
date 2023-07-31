@@ -25,10 +25,8 @@ async function BillBoardFormPage({ params }: Props) {
   const billboard = await findBillboardById(params.billboardId)
 
   return (
-    <main className="flex-col">
-      <section className="flex-1 space-y-4 p-8 pt-6">
-        <BillboardForm initialData={billboard} />
-      </section>
+    <main className="container py-8">
+      <BillboardForm initialData={billboard} />
     </main>
   )
 }

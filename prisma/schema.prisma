@@ -65,15 +65,107 @@ model Store {
   userId     String      @db.ObjectId
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
-  billboards billboard[]
+  billboards Billboard[]
+  Category   Category[]
+  Size       Size[]
+  Color      Color[]
+  Product    Product[]
+  Order      Order[]
 }
 
-model billboard {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  store     Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
-  storeId   String   @db.ObjectId
+model Billboard {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  store     Store      @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  storeId   String     @db.ObjectId
   label     String
   imageUrl  String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Category  Category[]
+}
+
+model Category {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  store       Store     @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  storeId     String    @db.ObjectId
+  billboard   Billboard @relation(fields: [billboardId], references: [id], onDelete: Cascade)
+  billboardId String    @db.ObjectId
+  name        String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  Product     Product[]
+}
+
+model Size {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  store     Store     @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  storeId   String    @db.ObjectId
+  name      String
+  value     String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Product   Product[]
+}
+
+model Color {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  store     Store     @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  storeId   String    @db.ObjectId
+  name      String
+  value     String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Product   Product[]
+}
+
+model Product {
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
+  store      Store       @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  storeId    String      @db.ObjectId
+  category   Category    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId String      @db.ObjectId
+  name       String
+  price      Float
+  isFeatured Boolean     @default(false)
+  isArchived Boolean     @default(false)
+  size       Size        @relation(fields: [sizeId], references: [id], onDelete: Cascade)
+  sizeId     String      @db.ObjectId
+  color      Color       @relation(fields: [colorId], references: [id], onDelete: Cascade)
+  colorId    String      @db.ObjectId
+  images     Image[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  OrderItem  OrderItem[]
+}
+
+model Image {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String   @db.ObjectId
+  url       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  Store     Store       @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  storeId   String      @db.ObjectId
+  isPaid    Boolean     @default(false)
+  phone     String      @db.String
+  address   String      @db.String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  OrderItem OrderItem[]
+}
+
+model OrderItem {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId   String   @db.ObjectId
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String   @db.ObjectId
+  quantity  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

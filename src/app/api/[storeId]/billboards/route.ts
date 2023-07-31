@@ -41,7 +41,7 @@ export async function GET(_: Request, { params }: Params) {
     })
     return NextResponse.json(billboards)
   } catch (error) {
-    console.log("[BILLBOARDS_POST]", error)
+    console.log("[BILLBOARDS_GET]", error)
     return NextResponse.json(
       { message: "Something went wrong" },
       {
