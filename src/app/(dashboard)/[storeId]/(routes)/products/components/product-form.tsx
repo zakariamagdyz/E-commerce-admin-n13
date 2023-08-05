@@ -222,7 +222,7 @@ export const ProductForm = ({ initialData, categories, sizes, colors }: Props) =
                   </FormControl>
                   <div className="space-y-1 leading-none">
                     <FormLabel>Archived</FormLabel>
-                    <FormDescription>This product will appear anywhere in the store.</FormDescription>
+                    <FormDescription>This product will not appear anywhere in the store.</FormDescription>
                   </div>
                 </FormItem>
               )}
