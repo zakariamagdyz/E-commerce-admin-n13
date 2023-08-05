@@ -11,35 +11,10 @@ type Params = { params: { storeId: string } }
 
 export async function GET(_: Request, { params }: Params) {
   try {
-    // Check for Auth
-    const session = await getServerSession(options)
-    if (!session?.user.id) {
-      return NextResponse.json(
-        { message: "UnAuthenticated" },
-        {
-          status: 401,
-        }
-      )
-    }
-
-    // Check if user owns the store
-    const store = await prismadb.store.findFirst({
-      where: { id: params.storeId, userId: session.user.id },
-    })
-
-    if (!store) {
-      return NextResponse.json(
-        { message: "UnAuthorized" },
-        {
-          status: 403,
-        }
-      )
-    }
-
-    const billboards = await prismadb.billboard.findMany({
+    const categories = await prismadb.category.findMany({
       where: { storeId: params.storeId },
     })
-    return NextResponse.json(billboards)
+    return NextResponse.json(categories)
   } catch (error) {
     console.log("[CATEGORIES_GET]", error)
     return NextResponse.json(

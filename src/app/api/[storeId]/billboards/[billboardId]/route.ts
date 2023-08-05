@@ -11,31 +11,6 @@ type Params = { params: { storeId: string; billboardId: string } }
 
 export async function GET(_req: Request, { params }: Params) {
   try {
-    // Check for Auth
-    const session = await getServerSession(options)
-    if (!session?.user.id) {
-      return NextResponse.json(
-        { message: "UnAuthenticated" },
-        {
-          status: 401,
-        }
-      )
-    }
-
-    // Check if user owns the store
-    const store = await prismadb.store.findFirst({
-      where: { id: params.storeId, userId: session.user.id },
-    })
-
-    if (!store) {
-      return NextResponse.json(
-        { message: "UnAuthorized" },
-        {
-          status: 403,
-        }
-      )
-    }
-
     const billboard = await prismadb.billboard.findUnique({
       where: { id: params.billboardId },
     })
