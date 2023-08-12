@@ -12,7 +12,8 @@
     "format": "prettier -uw .",
     "typecheck": "tsc --noEmit",
     "test": "jest --passWithNoTests --bail ",
-    "test:ci": "jest --coverage"
+    "test:ci": "jest --coverage",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.1",
