@@ -2,7 +2,7 @@
 
 import { ImagePlus, Trash } from "lucide-react"
 import Image from "next/image"
-import { CldUploadWidget } from "next-cloudinary"
+import { CldUploadWidget, CldUploadWidgetResults } from "next-cloudinary"
 
 import { Button } from "./button"
 
@@ -15,8 +15,8 @@ type Props = {
 
 // TODO: Add hydration workaround for SSR
 const ImageUpload = ({ onChange, onRemove, value, disabled }: Props) => {
-  const onUpload = (results: { info: { secure_url: string } }) => {
-    onChange(results.info.secure_url)
+  const onUpload = (results: CldUploadWidgetResults) => {
+    onChange((results.info as { secure_url: string }).secure_url)
   }
   return (
     <div>

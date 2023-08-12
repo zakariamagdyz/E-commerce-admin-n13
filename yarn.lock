@@ -4396,15 +4396,15 @@ __metadata:
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-simple-import-sort: ^10.0.0
     eslint-plugin-tailwindcss: ^3.13.0
-    eslint-plugin-testing-library: ^5.11.0
+    eslint-plugin-testing-library: ^5.11.1
     husky: ^8.0.3
     jest: ^29.6.1
     jest-environment-jsdom: ^29.6.1
     lint-staged: ^13.2.3
-    lucide-react: ^0.263.0
+    lucide-react: ^0.265.0
     next: 13.4.9
     next-auth: ^4.22.3
-    next-cloudinary: ^4.16.2
+    next-cloudinary: ^4.18.0
     next-themes: ^0.2.1
     postcss: 8.4.25
     prettier: ^3.0.0
@@ -4874,14 +4874,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-testing-library@npm:^5.11.0":
-  version: 5.11.0
-  resolution: "eslint-plugin-testing-library@npm:5.11.0"
+"eslint-plugin-testing-library@npm:^5.11.1":
+  version: 5.11.1
+  resolution: "eslint-plugin-testing-library@npm:5.11.1"
   dependencies:
     "@typescript-eslint/utils": ^5.58.0
   peerDependencies:
     eslint: ^7.5.0 || ^8.0.0
-  checksum: 7f19d3dedd7788b411ca3d9045de682feb26025b9c26d97d4e2f0bf62f5eaa276147d946bd5d0cd967b822e546a954330fdb7ef80485301264f646143f011a02
+  checksum: 9f3fc68ef9f13016a4381b33ab5dbffcc189e5de3eaeba184bcf7d2771faa7f54e59c04b652162fb1c0f83fb52428dd909db5450a25508b94be59eba69fcc990
   languageName: node
   linkType: hard
 
@@ -7164,12 +7164,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:^0.263.0":
-  version: 0.263.0
-  resolution: "lucide-react@npm:0.263.0"
+"lucide-react@npm:^0.265.0":
+  version: 0.265.0
+  resolution: "lucide-react@npm:0.265.0"
   peerDependencies:
     react: ^16.5.1 || ^17.0.0 || ^18.0.0
-  checksum: 51c7586abf25b465e4745ca22bbcd0cb46837026265a9730c872c601a5d3ee0032441c76af973780daed5a7f0308faa632cd2391efb1e3ef91a5b5e4a4212112
+  checksum: c5c7838f4cb54b91678ab248403df279e0aba53938e383c65d7df594e517d9f9a4714c90568efa535ba58ec341e2cf1238de55a99668b1a342d1e44ae6f16d85
   languageName: node
   linkType: hard
 
@@ -7533,16 +7533,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-cloudinary@npm:^4.16.2":
-  version: 4.16.2
-  resolution: "next-cloudinary@npm:4.16.2"
+"next-cloudinary@npm:^4.18.0":
+  version: 4.18.0
+  resolution: "next-cloudinary@npm:4.18.0"
   dependencies:
     "@cloudinary-util/url-loader": ^3.10.0
     "@cloudinary-util/util": ^2.2.1
   peerDependencies:
     next: ^12 || ^13
     react: ^17 || ^18
-  checksum: cd1242770bb01b14f84100f33aacf43a708d068b6040b6d3a66a12f3391e5d1ecf9313b00bf782c53465c0bcf95d3c759104c45fdcf9cfb7d3a81e5b908e59f9
+  checksum: 12ae2b50cb0a3741430b0d111e3a97e70cf1a17ddb9d0e6be20ec7090097824f9b2fd2a3f9fd0f0fa83194e35141882f348d47e8dfe58fe1b90cfa5b2d79771a
   languageName: node
   linkType: hard
 
