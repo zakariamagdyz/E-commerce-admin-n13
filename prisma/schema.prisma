@@ -148,15 +148,15 @@ model Image {
 }
 
 model Order {
-  id        String      @id @default(auto()) @map("_id") @db.ObjectId
-  Store     Store       @relation(fields: [storeId], references: [id], onDelete: Cascade)
-  storeId   String      @db.ObjectId
-  isPaid    Boolean     @default(false)
-  phone     String      @db.String
-  address   String      @db.String
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  OrderItem OrderItem[]
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
+  Store      Store       @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  storeId    String      @db.ObjectId
+  isPaid     Boolean     @default(false)
+  phone      String      @default("") @db.String
+  address    String      @default("") @db.String
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  orderItems OrderItem[]
 }
 
 model OrderItem {
@@ -165,7 +165,6 @@ model OrderItem {
   orderId   String   @db.ObjectId
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId String   @db.ObjectId
-  quantity  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

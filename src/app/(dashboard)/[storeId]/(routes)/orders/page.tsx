@@ -21,7 +21,7 @@ async function BillboardPage({ params }: Params) {
       storeId: params.storeId,
     },
     include: {
-      OrderItem: {
+      orderItems: {
         include: {
           product: true,
         },
@@ -36,8 +36,8 @@ async function BillboardPage({ params }: Params) {
     id: item.id,
     phone: item.phone,
     address: item.address,
-    products: item.OrderItem.map((orderItem) => (orderItem.product ? orderItem.product.name : "")).join(", "),
-    totalPrice: formatter.format(item.OrderItem.reduce((acc, orderItem) => acc + orderItem.product.price, 0)),
+    products: item.orderItems.map((orderItem) => (orderItem.product ? orderItem.product.name : "")).join(", "),
+    totalPrice: formatter.format(item.orderItems.reduce((acc, orderItem) => acc + orderItem.product.price, 0)),
     isPaid: item.isPaid,
     createdAt: format(item.createdAt, "MMM do, yyyy"),
   }))
