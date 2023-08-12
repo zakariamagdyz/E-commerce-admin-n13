@@ -15,8 +15,8 @@ type Props = {
 
 // TODO: Add hydration workaround for SSR
 const ImageUpload = ({ onChange, onRemove, value, disabled }: Props) => {
-  const onUpload = (result: { info: { secure_url: string } }) => {
-    onChange(result.info.secure_url)
+  const onUpload = (results: { info: { secure_url: string } }) => {
+    onChange(results.info.secure_url)
   }
   return (
     <div>
