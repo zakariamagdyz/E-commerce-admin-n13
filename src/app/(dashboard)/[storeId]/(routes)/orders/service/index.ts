@@ -9,7 +9,7 @@ export const findOrderById = cache(async (orderId: string) => {
         id: orderId,
       },
       include: {
-        OrderItem: {
+        orderItems: {
           include: {
             product: true,
           },

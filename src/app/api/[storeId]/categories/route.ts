@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
-import { z } from "zod"
 
 import { options } from "@/app/api/auth/[...nextauth]/options"
 import prismadb from "@/lib/prismadb"
+import { handleServerError } from "@/utils/handleServerError"
 
 import { bodySchema } from "./schema"
 
@@ -16,13 +16,7 @@ export async function GET(_: Request, { params }: Params) {
     })
     return NextResponse.json(categories)
   } catch (error) {
-    console.log("[CATEGORIES_GET]", error)
-    return NextResponse.json(
-      { message: "Something went wrong" },
-      {
-        status: 500,
-      }
-    )
+    handleServerError(error, "[CATEGORIES_GET]")
   }
 }
 
@@ -62,21 +56,6 @@ export async function POST(req: Request, { params }: Params) {
     })
     return NextResponse.json(category)
   } catch (error) {
-    // Check for Schema error
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { message: error.issues[0].message },
-        {
-          status: 400,
-        }
-      )
-    }
-    console.log("[CATEGORIES_POST]", error)
-    return NextResponse.json(
-      { message: "Something went wrong" },
-      {
-        status: 500,
-      }
-    )
+    handleServerError(error, "[CATEGORIES_POST]")
   }
 }
