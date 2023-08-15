@@ -2,6 +2,7 @@ import { CreditCard, DollarSign, Package } from "lucide-react"
 import { Metadata } from "next"
 
 import { Overview } from "@/components/overview"
+import RevalidateButton from "@/components/revalidate-button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Heading } from "@/components/ui/heading"
 import { Separator } from "@/components/ui/separator"
@@ -40,7 +41,10 @@ async function page({ params }: Props) {
   return (
     <main className="container py-8">
       <section className="space-y-4 p-8 pt-6">
-        <Heading title="Dashboard" description="Overview of your store" />
+        <div className="flex flex-col  justify-between gap-4 sm:flex-row sm:items-center">
+          <Heading title="Dashboard" description="Overview of your store" />
+          <RevalidateButton />
+        </div>
         <Separator />
       </section>
       <section className="grid grid-cols-3 gap-4">
