@@ -62,8 +62,8 @@ export const POST = async (req: Request, { params }: Params) => {
       mode: "payment",
       billing_address_collection: "required",
       phone_number_collection: { enabled: true },
-      success_url: `${process.env.FRONTEND_STORE_URL}/cart/?orderId=${order.id}`,
-      cancel_url: `${process.env.FRONTEND_STORE_URL}/cart/?canceled=true`,
+      success_url: `${process.env.NEXT_PUBLIC_FRONTEND_STORE_URL}/cart/?orderId=${order.id}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_FRONTEND_STORE_URL}/cart/?canceled=true`,
 
       metadata: {
         orderId: order.id,
