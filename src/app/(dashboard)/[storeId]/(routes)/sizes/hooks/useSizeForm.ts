@@ -1,10 +1,10 @@
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Size } from "@prisma/client"
-import { useParams, useRouter } from "next/navigation"
-import { useCallback } from "react"
-import { useForm } from "react-hook-form"
-import { toast } from "react-hot-toast"
-import { z } from "zod"
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Size } from '@prisma/client'
+import { useParams, useRouter } from 'next/navigation'
+import { useCallback } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-hot-toast'
+import { z } from 'zod'
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -17,17 +17,17 @@ export const useSizeForm = (initialData: Size | null) => {
   const router = useRouter()
   const { storeId, sizeId } = useParams() as { storeId: string; sizeId: string }
   const formInitialData = {
-    name: initialData?.name || "",
-    value: initialData?.value || "",
+    name: initialData?.name || '',
+    value: initialData?.value || '',
   }
 
   const form = useForm<SizeFormValue>({
     resolver: zodResolver(formSchema),
     defaultValues: formInitialData,
   })
-  const toastMessage = initialData ? "Size updated" : "Size created"
+  const toastMessage = initialData ? 'Size updated' : 'Size created'
   const url = initialData ? `/api/${storeId}/sizes/${sizeId}` : `/api/${storeId}/sizes`
-  const method = initialData ? "PATCH" : "POST"
+  const method = initialData ? 'PATCH' : 'POST'
 
   const onSubmit = useCallback(
     async (values: SizeFormValue) => {

@@ -1,9 +1,9 @@
-import { Metadata } from "next"
+import { Metadata } from 'next'
 
-import prismadb from "@/lib/prismadb"
+import prismadb from '@/lib/prismadb'
 
-import { ProductForm } from "../components/product-form"
-import { findProductById } from "../service"
+import { ProductForm } from '../components/product-form'
+import { findProductById } from '../service'
 
 type Props = {
   params: {
@@ -15,7 +15,7 @@ type Props = {
 export async function generateMetadata({ params: { productId } }: Props): Promise<Metadata> {
   const product = await findProductById(productId)
   if (!product) {
-    return { title: "Create new product" }
+    return { title: 'Create new product' }
   }
 
   return {
@@ -39,7 +39,7 @@ async function BillBoardFormPage({ params }: Props) {
   const [categories, colors, sizes] = await Promise.all([categoriesPromise, colorsPromise, sizesPromise])
 
   return (
-    <main className="container py-8">
+    <main className='container py-8'>
       <ProductForm initialData={product} categories={categories} colors={colors} sizes={sizes} />
     </main>
   )

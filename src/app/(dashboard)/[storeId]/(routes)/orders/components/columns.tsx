@@ -1,10 +1,10 @@
-"use client"
+'use client'
 
-import { type ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown } from "lucide-react"
+import { type ColumnDef } from '@tanstack/react-table'
+import { ArrowUpDown } from 'lucide-react'
 
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 
 export type OrderColumn = {
   id: string
@@ -18,58 +18,58 @@ export type OrderColumn = {
 
 export const columns: ColumnDef<OrderColumn>[] = [
   {
-    id: "select",
+    id: 'select',
     header: ({ table }) => (
       <Checkbox
         checked={table.getIsAllPageRowsSelected()}
-        aria-label="Select all"
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label='Select all'
+        onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
       />
     ),
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
-        aria-label="Select row"
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label='Select row'
+        onCheckedChange={value => row.toggleSelected(!!value)}
       />
     ),
     enableSorting: false,
     enableHiding: false,
   },
   {
-    accessorKey: "products",
+    accessorKey: 'products',
     header: ({ column }) => {
       return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+        <Button variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
           Products
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className='ml-2 h-4 w-4' />
         </Button>
       )
     },
   },
   {
-    accessorKey: "phone",
-    header: "Phone",
+    accessorKey: 'phone',
+    header: 'Phone',
   },
   {
-    accessorKey: "address",
-    header: "Adress",
+    accessorKey: 'address',
+    header: 'Adress',
   },
   {
-    accessorKey: "totalPrice",
-    header: "Total Price",
+    accessorKey: 'totalPrice',
+    header: 'Total Price',
   },
   {
-    accessorKey: "isPaid",
-    header: "Paid",
+    accessorKey: 'isPaid',
+    header: 'Paid',
   },
   {
-    accessorKey: "createdAt",
+    accessorKey: 'createdAt',
     header: ({ column }) => {
       return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+        <Button variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
           Date
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className='ml-2 h-4 w-4' />
         </Button>
       )
     },

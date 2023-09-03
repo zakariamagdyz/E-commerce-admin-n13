@@ -1,5 +1,5 @@
-"use clinet"
-import { useEffect, useState } from "react"
+'use clinet'
+import { useEffect, useState } from 'react'
 
 const useOrigin = () => {
   const [mounted, setMounted] = useState(false)
@@ -9,9 +9,9 @@ const useOrigin = () => {
   }, [])
 
   if (!mounted) {
-    return ""
+    return ''
   }
-  return typeof window !== "undefined" ? window.location.origin : ""
+  return typeof window !== 'undefined' ? window.location.origin : ''
 }
 
 export default useOrigin

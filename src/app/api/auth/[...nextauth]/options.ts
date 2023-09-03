@@ -1,8 +1,9 @@
-import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import { NextAuthOptions } from "next-auth"
-import GithubProvider, { GithubProfile } from "next-auth/providers/github"
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import { NextAuthOptions } from 'next-auth'
+import GithubProvider, { GithubProfile } from 'next-auth/providers/github'
+import GoogleProvider, { GoogleProfile } from 'next-auth/providers/google'
 
-import prismadb from "@/lib/prismadb"
+import prismadb from '@/lib/prismadb'
 
 export const options: NextAuthOptions = {
   providers: [
@@ -11,7 +12,7 @@ export const options: NextAuthOptions = {
         return {
           name: profile.name ?? profile.login,
           email: profile.email,
-          role: profile.role ?? "user",
+          role: profile.role ?? 'user',
           id: profile.id.toString(),
           image: profile.avatar_url,
         }
@@ -19,18 +20,26 @@ export const options: NextAuthOptions = {
       clientId: process.env.GITHUB_CLIENT_ID as string,
       clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
     }),
-    // ...add more providers here
-    // GithubProvider({
-    //   clientId: process.env.GITHUB_CLIENT_ID as string,
-    //   clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
-    // }),
+    GoogleProvider({
+      profile(profile: GoogleProfile) {
+        return {
+          name: profile.name ?? profile.login,
+          email: profile.email,
+          role: profile.role ?? 'user',
+          id: profile.sub,
+          image: profile.picture,
+        }
+      },
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    }),
   ],
-  pages: { signIn: "/signin" },
+  pages: { signIn: '/signin' },
   adapter: PrismaAdapter(prismadb),
 
-  debug: process.env.NODE_ENV === "development",
+  debug: process.env.NODE_ENV === 'development',
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
   callbacks: {
     // Ref: https://authjs.dev/guides/basics/role-based-access-control#persisting-the-role

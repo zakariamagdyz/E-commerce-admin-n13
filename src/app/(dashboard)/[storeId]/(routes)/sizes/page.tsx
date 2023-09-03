@@ -1,17 +1,17 @@
-import { format } from "date-fns"
-import { Metadata } from "next"
-import React from "react"
+import { format } from 'date-fns'
+import { Metadata } from 'next'
+import React from 'react'
 
-import prismadb from "@/lib/prismadb"
+import prismadb from '@/lib/prismadb'
 
-import { SizeClient } from "./components/client"
-import { SizeColumn } from "./components/columns"
+import { SizeClient } from './components/client'
+import { SizeColumn } from './components/columns'
 
 type Params = { params: { storeId: string } }
 
 export const metadata: Metadata = {
-  title: "Sizes",
-  description: "Store Sizes",
+  title: 'Sizes',
+  description: 'Store Sizes',
 }
 
 async function SizesPage({ params }: Params) {
@@ -20,18 +20,18 @@ async function SizesPage({ params }: Params) {
       storeId: params.storeId,
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
   })
 
-  const formatedsizes: SizeColumn[] = sizes.map((item) => ({
+  const formatedsizes: SizeColumn[] = sizes.map(item => ({
     id: item.id,
     name: item.name,
     value: item.value,
-    createdAt: format(item.createdAt, "MMM do, yyyy"),
+    createdAt: format(item.createdAt, 'MMM do, yyyy'),
   }))
   return (
-    <main className="container py-6">
+    <main className='container py-6'>
       <SizeClient sizes={formatedsizes} />
     </main>
   )

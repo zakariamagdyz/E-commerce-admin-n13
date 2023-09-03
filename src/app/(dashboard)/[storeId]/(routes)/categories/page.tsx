@@ -1,16 +1,16 @@
-import { format } from "date-fns"
-import { Metadata } from "next"
+import { format } from 'date-fns'
+import { Metadata } from 'next'
 
-import prismadb from "@/lib/prismadb"
+import prismadb from '@/lib/prismadb'
 
-import { CategoryClient } from "./components/client"
-import { CategoryColumn } from "./components/columns"
+import { CategoryClient } from './components/client'
+import { CategoryColumn } from './components/columns'
 
 type Params = { params: { storeId: string } }
 
 export const metadata: Metadata = {
-  title: "Categories",
-  description: "Store categories",
+  title: 'Categories',
+  description: 'Store categories',
 }
 
 async function CategoryPage({ params }: Params) {
@@ -22,18 +22,18 @@ async function CategoryPage({ params }: Params) {
       billboard: true,
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
   })
 
-  const formatedcategories: CategoryColumn[] = categories.map((item) => ({
+  const formatedcategories: CategoryColumn[] = categories.map(item => ({
     id: item.id,
     name: item.name,
     billboardLabel: item.billboard.label,
-    createdAt: format(item.createdAt, "MMM do, yyyy"),
+    createdAt: format(item.createdAt, 'MMM do, yyyy'),
   }))
   return (
-    <main className="container py-6">
+    <main className='container py-6'>
       <CategoryClient categories={formatedcategories} />
     </main>
   )

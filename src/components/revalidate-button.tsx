@@ -1,15 +1,15 @@
-"use client"
-import React from "react"
+'use client'
+import React from 'react'
 
-import useRevalidateStore from "@/hooks/services/useRevalidateStore"
+import useRevalidateStore from '@/hooks/services/useRevalidateStore'
 
-import { Button } from "./ui/button"
+import { Button } from './ui/button'
 
 const RevalidateButton = () => {
   const { isLoading, revalidateStore } = useRevalidateStore()
   return (
     <Button disabled={isLoading} onClick={revalidateStore}>
-      {isLoading ? "loading..." : "Revalidate Store Cache"}
+      {isLoading ? 'loading...' : 'Revalidate Store Cache'}
     </Button>
   )
 }

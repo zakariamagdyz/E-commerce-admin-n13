@@ -1,7 +1,7 @@
-import { Metadata } from "next"
+import { Metadata } from 'next'
 
-import { BillboardForm } from "../components/billboard-form"
-import { findBillboardById } from "../service"
+import { BillboardForm } from '../components/billboard-form'
+import { findBillboardById } from '../service'
 
 type Props = {
   params: {
@@ -12,7 +12,7 @@ type Props = {
 export async function generateMetadata({ params: { billboardId } }: Props): Promise<Metadata> {
   const billboard = await findBillboardById(billboardId)
   if (!billboard) {
-    return { title: "Create new billboard" }
+    return { title: 'Create new billboard' }
   }
 
   return {
@@ -25,7 +25,7 @@ async function BillBoardFormPage({ params }: Props) {
   const billboard = await findBillboardById(params.billboardId)
 
   return (
-    <main className="container py-8">
+    <main className='container py-8'>
       <BillboardForm initialData={billboard} />
     </main>
   )

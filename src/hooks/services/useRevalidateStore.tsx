@@ -1,7 +1,7 @@
-import React from "react"
-import { toast } from "react-hot-toast"
+import React from 'react'
+import { toast } from 'react-hot-toast'
 
-import { revalidateStoreCache } from "@/services/revalidate-store-cache"
+import { revalidateStoreCache } from '@/services/revalidate-store-cache'
 
 const useRevalidateStore = () => {
   const [isLoading, setIsLoading] = React.useState(false)
@@ -10,9 +10,9 @@ const useRevalidateStore = () => {
     try {
       setIsLoading(true)
       await revalidateStoreCache()
-      toast.success("Store revalidated")
+      toast.success('Store revalidated')
     } catch (error) {
-      toast.error("Somthing went wrong")
+      toast.error('Somthing went wrong')
     } finally {
       setIsLoading(false)
     }

@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server"
-import { getServerSession } from "next-auth"
-import { z } from "zod"
+import { NextResponse } from 'next/server'
+import { getServerSession } from 'next-auth'
+import { z } from 'zod'
 
-import { options } from "@/app/api/auth/[...nextauth]/options"
-import prismadb from "@/lib/prismadb"
+import { options } from '@/app/api/auth/[...nextauth]/options'
+import prismadb from '@/lib/prismadb'
 
-import { bodySchema } from "./schema"
+import { bodySchema } from './schema'
 
 export async function POST(req: Request) {
   try {
@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     const session = await getServerSession(options)
     if (!session?.user.id) {
       return NextResponse.json(
-        { message: "UnAuthenticated" },
+        { message: 'UnAuthenticated' },
         {
           status: 401,
         }
@@ -38,9 +38,9 @@ export async function POST(req: Request) {
         }
       )
     }
-    console.log("[STORES_POST]", error)
+    console.log('[STORES_POST]', error)
     return NextResponse.json(
-      { message: "Something went wrong" },
+      { message: 'Something went wrong' },
       {
         status: 500,
       }

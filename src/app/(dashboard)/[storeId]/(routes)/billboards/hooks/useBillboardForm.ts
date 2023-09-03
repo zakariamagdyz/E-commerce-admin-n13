@@ -1,10 +1,10 @@
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Billboard } from "@prisma/client"
-import { useParams, useRouter } from "next/navigation"
-import { useCallback } from "react"
-import { useForm } from "react-hook-form"
-import { toast } from "react-hot-toast"
-import { z } from "zod"
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Billboard } from '@prisma/client'
+import { useParams, useRouter } from 'next/navigation'
+import { useCallback } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-hot-toast'
+import { z } from 'zod'
 
 const formSchema = z.object({
   label: z.string().min(1),
@@ -17,17 +17,17 @@ export const useBillboardForm = (initialData: Billboard | null) => {
   const router = useRouter()
   const { storeId, billboardId } = useParams() as { storeId: string; billboardId: string }
   const formInitialData = {
-    label: initialData?.label || "",
-    imageUrl: initialData?.imageUrl || "",
+    label: initialData?.label || '',
+    imageUrl: initialData?.imageUrl || '',
   }
 
   const form = useForm<BillboardFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: formInitialData,
   })
-  const toastMessage = initialData ? "Billboard updated" : "Billboard created"
+  const toastMessage = initialData ? 'Billboard updated' : 'Billboard created'
   const url = initialData ? `/api/${storeId}/billboards/${billboardId}` : `/api/${storeId}/billboards`
-  const method = initialData ? "PATCH" : "POST"
+  const method = initialData ? 'PATCH' : 'POST'
 
   const onSubmit = useCallback(
     async (values: BillboardFormValues) => {

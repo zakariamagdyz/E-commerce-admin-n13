@@ -1,12 +1,12 @@
-"use client"
+'use client'
 
-import { type ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown } from "lucide-react"
+import { type ColumnDef } from '@tanstack/react-table'
+import { ArrowUpDown } from 'lucide-react'
 
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 
-import CellAction from "./cell-action"
+import CellAction from './cell-action'
 
 export type ColorColumn = {
   id: string
@@ -17,65 +17,65 @@ export type ColorColumn = {
 
 export const columns: ColumnDef<ColorColumn>[] = [
   {
-    id: "select",
+    id: 'select',
     header: ({ table }) => (
       <Checkbox
         checked={table.getIsAllPageRowsSelected()}
-        aria-label="Select all"
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label='Select all'
+        onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
       />
     ),
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
-        aria-label="Select row"
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label='Select row'
+        onCheckedChange={value => row.toggleSelected(!!value)}
       />
     ),
     enableSorting: false,
     enableHiding: false,
   },
   {
-    accessorKey: "name",
+    accessorKey: 'name',
     header: ({ column }) => {
       return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+        <Button variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
           Name
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className='ml-2 h-4 w-4' />
         </Button>
       )
     },
   },
   {
-    accessorKey: "value",
+    accessorKey: 'value',
     header: ({ column }) => {
       return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+        <Button variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
           Value
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className='ml-2 h-4 w-4' />
         </Button>
       )
     },
     cell: ({ row }) => (
-      <div className="flex items-center gap-x-2">
+      <div className='flex items-center gap-x-2'>
         {row.original.value}
-        <div className="h-6 w-6 rounded-full border" style={{ backgroundColor: row.original.value }}></div>
+        <div className='h-6 w-6 rounded-full border' style={{ backgroundColor: row.original.value }}></div>
       </div>
     ),
   },
   {
-    accessorKey: "createdAt",
+    accessorKey: 'createdAt',
     header: ({ column }) => {
       return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+        <Button variant='ghost' onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
           Date
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <ArrowUpDown className='ml-2 h-4 w-4' />
         </Button>
       )
     },
   },
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) => <CellAction color={row.original} />,
   },
 ]

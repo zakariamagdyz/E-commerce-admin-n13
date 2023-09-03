@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server"
-import { getServerSession } from "next-auth"
+import { NextResponse } from 'next/server'
+import { getServerSession } from 'next-auth'
 
-import { options } from "@/app/api/auth/[...nextauth]/options"
-import prismadb from "@/lib/prismadb"
-import { handleServerError } from "@/utils/handleServerError"
+import { options } from '@/app/api/auth/[...nextauth]/options'
+import prismadb from '@/lib/prismadb'
+import { handleServerError } from '@/utils/handleServerError'
 
-import { bodySchema } from "./schema"
+import { bodySchema } from './schema'
 
 type Params = { params: { storeId: string } }
 
@@ -16,7 +16,7 @@ export async function GET(_: Request, { params }: Params) {
     })
     return NextResponse.json(categories)
   } catch (error) {
-    handleServerError(error, "[CATEGORIES_GET]")
+    handleServerError(error, '[CATEGORIES_GET]')
   }
 }
 
@@ -26,7 +26,7 @@ export async function POST(req: Request, { params }: Params) {
     const session = await getServerSession(options)
     if (!session?.user.id) {
       return NextResponse.json(
-        { message: "UnAuthenticated" },
+        { message: 'UnAuthenticated' },
         {
           status: 401,
         }
@@ -44,7 +44,7 @@ export async function POST(req: Request, { params }: Params) {
 
     if (!store) {
       return NextResponse.json(
-        { message: "UnAuthorized" },
+        { message: 'UnAuthorized' },
         {
           status: 403,
         }
@@ -56,6 +56,6 @@ export async function POST(req: Request, { params }: Params) {
     })
     return NextResponse.json(category)
   } catch (error) {
-    handleServerError(error, "[CATEGORIES_POST]")
+    handleServerError(error, '[CATEGORIES_POST]')
   }
 }

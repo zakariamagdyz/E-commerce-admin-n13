@@ -1,9 +1,9 @@
-import { Store } from "@prisma/client"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { toast } from "react-hot-toast"
+import { Store } from '@prisma/client'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { toast } from 'react-hot-toast'
 
-export const useDeleteModal = (storeId: Store["id"]) => {
+export const useDeleteModal = (storeId: Store['id']) => {
   const [isOpen, setOpen] = useState(false)
   const [isLoading, setLoading] = useState(false)
   const router = useRouter()
@@ -14,15 +14,15 @@ export const useDeleteModal = (storeId: Store["id"]) => {
     setLoading(true)
     try {
       const res = await fetch(`/api/stores/${storeId}`, {
-        method: "DELETE",
+        method: 'DELETE',
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.message)
       // router.refresh()
-      router.push("/")
-      toast.success("Store deleted")
+      router.push('/')
+      toast.success('Store deleted')
     } catch (error) {
-      if (error instanceof Error) toast.error("Make sure you removed all products and categories first")
+      if (error instanceof Error) toast.error('Make sure you removed all products and categories first')
     } finally {
       setLoading(false)
       onClose()
