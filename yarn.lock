@@ -4408,7 +4408,6 @@ __metadata:
     next-themes: ^0.2.1
     postcss: 8.4.25
     prettier: ^3.0.0
-    prettier-plugin-tailwind: ^2.2.12
     prettier-plugin-tailwindcss: ^0.3.0
     prisma: ^5.0.0
     react: 18.2.0
@@ -8231,18 +8230,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-tailwind@npm:^2.2.12":
-  version: 2.2.12
-  resolution: "prettier-plugin-tailwind@npm:2.2.12"
-  dependencies:
-    tailwind-classes-sorter: ^0.2.5
-  peerDependencies:
-    prettier: ^2.0.0
-    tailwindcss: "*"
-  checksum: 67608db2c315afdf267159cc99034459ef630be26b65dfc3191a49be4145594d9d802c6f1cd144b3e6c53bc3a6c3b24d9016703de093e2cb7d2ee7a4faa762d4
-  languageName: node
-  linkType: hard
-
 "prettier-plugin-tailwindcss@npm:^0.3.0":
   version: 0.3.0
   resolution: "prettier-plugin-tailwindcss@npm:0.3.0"
@@ -9533,15 +9520,6 @@ __metadata:
     "@pkgr/utils": ^2.3.1
     tslib: ^2.5.0
   checksum: 8a9560e5d8f3d94dc3cf5f7b9c83490ffa30d320093560a37b88f59483040771fd1750e76b9939abfbb1b5a23fd6dfbae77f6b338abffe7cae7329cd9b9bb86b
-  languageName: node
-  linkType: hard
-
-"tailwind-classes-sorter@npm:^0.2.5":
-  version: 0.2.5
-  resolution: "tailwind-classes-sorter@npm:0.2.5"
-  dependencies:
-    find-up: ^5.0.0
-  checksum: 340fa14f7c1ebfb6dc82e2541a2a8102b9541666b011bb154d53761f3291f553279876cb6ffb87d30014c31e19c80888239ca4075754e650276120532524b854
   languageName: node
   linkType: hard
 

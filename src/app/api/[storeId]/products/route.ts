@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server"
-import { getServerSession } from "next-auth"
-import { z } from "zod"
+import { NextResponse } from 'next/server'
+import { getServerSession } from 'next-auth'
 
-import { options } from "@/app/api/auth/[...nextauth]/options"
-import prismadb from "@/lib/prismadb"
+import { options } from '@/app/api/auth/[...nextauth]/options'
+import prismadb from '@/lib/prismadb'
+import { handleServerError } from '@/utils/handleServerError'
 
-import { bodySchema } from "./schema"
+import { bodySchema } from './schema'
 
 type Params = { params: { storeId: string } }
 
@@ -36,10 +36,10 @@ export async function GET(req: Request, { params }: Params) {
     //   )
     // }
     const { searchParams } = new URL(req.url)
-    const categoryId = searchParams.get("categoryId") || undefined
-    const colorId = searchParams.get("colorId") || undefined
-    const sizeId = searchParams.get("sizeId") || undefined
-    const isFeatured = searchParams.get("isFeatured") || undefined
+    const categoryId = searchParams.get('categoryId') || undefined
+    const colorId = searchParams.get('colorId') || undefined
+    const sizeId = searchParams.get('sizeId') || undefined
+    const isFeatured = searchParams.get('isFeatured') || undefined
 
     const products = await prismadb.product.findMany({
       where: {
@@ -47,7 +47,7 @@ export async function GET(req: Request, { params }: Params) {
         categoryId,
         colorId,
         sizeId,
-        isFeatured: isFeatured ? isFeatured === "true" : undefined,
+        isFeatured: isFeatured ? isFeatured === 'true' : undefined,
         isArchived: false,
       },
       include: {
@@ -57,14 +57,14 @@ export async function GET(req: Request, { params }: Params) {
         category: true,
       },
       orderBy: {
-        createdAt: "desc",
+        createdAt: 'desc',
       },
     })
     return NextResponse.json(products)
   } catch (error) {
-    console.log("[PRODUCTS_GET]", error)
+    console.log('[PRODUCTS_GET]', error)
     return NextResponse.json(
-      { message: "Something went wrong" },
+      { message: 'Something went wrong' },
       {
         status: 500,
       }
@@ -78,7 +78,7 @@ export async function POST(req: Request, { params }: Params) {
     const session = await getServerSession(options)
     if (!session?.user.id) {
       return NextResponse.json(
-        { message: "UnAuthenticated" },
+        { message: 'UnAuthenticated' },
         {
           status: 401,
         }
@@ -98,7 +98,7 @@ export async function POST(req: Request, { params }: Params) {
 
     if (!store) {
       return NextResponse.json(
-        { message: "UnAuthorized" },
+        { message: 'UnAuthorized' },
         {
           status: 403,
         }
@@ -120,21 +120,6 @@ export async function POST(req: Request, { params }: Params) {
     })
     return NextResponse.json(product)
   } catch (error) {
-    // Check for Schema error
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { message: error.issues[0].message },
-        {
-          status: 400,
-        }
-      )
-    }
-    console.log("[PRODUCTS_POST]", error)
-    return NextResponse.json(
-      { message: "Something went wrong" },
-      {
-        status: 500,
-      }
-    )
+    return handleServerError(error, '[PRODUCTS_POST]')
   }
 }
