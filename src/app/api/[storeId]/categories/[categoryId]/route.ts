@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server"
-import { getServerSession } from "next-auth"
-import { z } from "zod"
+import { NextResponse } from 'next/server'
+import { getServerSession } from 'next-auth'
+import { z } from 'zod'
 
-import { options } from "@/app/api/auth/[...nextauth]/options"
-import prismadb from "@/lib/prismadb"
+import { options } from '@/app/api/auth/[...nextauth]/options'
+import prismadb from '@/lib/prismadb'
 
-import { bodySchema } from "../schema"
+import { bodySchema } from '../schema'
 
 type Params = { params: { storeId: string; categoryId: string } }
 
@@ -17,9 +17,9 @@ export async function GET(_req: Request, { params }: Params) {
     })
     return NextResponse.json(category)
   } catch (error) {
-    console.log("[CATEGORIY_GET]", error)
+    console.log('[CATEGORIY_GET]', error)
     return NextResponse.json(
-      { message: "Something went wrong" },
+      { message: 'Something went wrong' },
       {
         status: 500,
       }
@@ -33,7 +33,7 @@ export async function PATCH(req: Request, { params }: Params) {
     const session = await getServerSession(options)
     if (!session?.user.id) {
       return NextResponse.json(
-        { message: "UnAuthenticated" },
+        { message: 'UnAuthenticated' },
         {
           status: 401,
         }
@@ -51,7 +51,7 @@ export async function PATCH(req: Request, { params }: Params) {
 
     if (!store) {
       return NextResponse.json(
-        { message: "UnAuthorized" },
+        { message: 'UnAuthorized' },
         {
           status: 403,
         }
@@ -74,9 +74,9 @@ export async function PATCH(req: Request, { params }: Params) {
         }
       )
     }
-    console.log("[CATEGORIY_PATCH]", error)
+    console.log('[CATEGORIY_PATCH]', error)
     return NextResponse.json(
-      { message: "Something went wrong" },
+      { message: 'Something went wrong' },
       {
         status: 500,
       }
@@ -90,7 +90,7 @@ export async function DELETE(_req: Request, { params }: Params) {
     const session = await getServerSession(options)
     if (!session?.user.id) {
       return NextResponse.json(
-        { message: "UnAuthenticated" },
+        { message: 'UnAuthenticated' },
         {
           status: 401,
         }
@@ -104,7 +104,7 @@ export async function DELETE(_req: Request, { params }: Params) {
 
     if (!store) {
       return NextResponse.json(
-        { message: "UnAuthorized" },
+        { message: 'UnAuthorized' },
         {
           status: 403,
         }
@@ -114,11 +114,11 @@ export async function DELETE(_req: Request, { params }: Params) {
     await prismadb.category.delete({
       where: { id: params.categoryId },
     })
-    return NextResponse.json({ message: "Category has been deleted successfully" }, { status: 200 })
+    return NextResponse.json({ message: 'Category has been deleted successfully' }, { status: 200 })
   } catch (error) {
-    console.log("[CATEGORIY_DELETE]", error)
+    console.log('[CATEGORIY_DELETE]', error)
     return NextResponse.json(
-      { message: "Something went wrong" },
+      { message: 'Something went wrong' },
       {
         status: 500,
       }

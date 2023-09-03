@@ -1,6 +1,6 @@
-import { useParams, useRouter } from "next/navigation"
-import { useState } from "react"
-import { toast } from "react-hot-toast"
+import { useParams, useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { toast } from 'react-hot-toast'
 
 type UseDeleteModal = {
   active: boolean
@@ -22,7 +22,7 @@ export const useDeleteModal = ({ active, pushToBillboards, billboardId }: UseDel
     setLoading(true)
     try {
       const res = await fetch(`/api/${storeId}/billboards/${billboardId}`, {
-        method: "DELETE",
+        method: 'DELETE',
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.message)
@@ -30,9 +30,9 @@ export const useDeleteModal = ({ active, pushToBillboards, billboardId }: UseDel
       router.refresh()
       if (pushToBillboards) router.push(`/${storeId}/billboards`)
 
-      toast.success("Billboard deleted")
+      toast.success('Billboard deleted')
     } catch (error) {
-      if (error instanceof Error) toast.error("Make sure you removed all products useing this billboard")
+      if (error instanceof Error) toast.error('Make sure you removed all products useing this billboard')
     } finally {
       setLoading(false)
       onClose()

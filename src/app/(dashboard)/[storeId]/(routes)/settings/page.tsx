@@ -1,10 +1,10 @@
-import { Metadata } from "next"
-import { redirect } from "next/navigation"
+import { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 
-import { checkForSession } from "@/utils/checkForSession"
+import { checkForSession } from '@/utils/checkForSession'
 
-import { getStoreApi } from "../../service"
-import { SettingsForm } from "./components/settings-form"
+import { getStoreApi } from '../../service'
+import { SettingsForm } from './components/settings-form'
 
 type Props = {
   params: { storeId: string }
@@ -14,7 +14,7 @@ export async function generateMetadata({ params: { storeId } }: Props): Promise<
   const user = await checkForSession()
   const store = await getStoreApi(storeId, user.id)
   if (!store) {
-    return { title: "Store Not Found" }
+    return { title: 'Store Not Found' }
   }
 
   return {
@@ -28,10 +28,10 @@ async function SettingsPage({ params }: Props) {
 
   const store = await getStoreApi(params.storeId, user.id)
 
-  if (!store) redirect("/")
+  if (!store) redirect('/')
 
   return (
-    <main className="container py-6">
+    <main className='container py-6'>
       <SettingsForm initialData={store} />
     </main>
   )

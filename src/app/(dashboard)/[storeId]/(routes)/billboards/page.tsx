@@ -1,17 +1,17 @@
-import { format } from "date-fns"
-import { Metadata } from "next"
-import React from "react"
+import { format } from 'date-fns'
+import { Metadata } from 'next'
+import React from 'react'
 
-import prismadb from "@/lib/prismadb"
+import prismadb from '@/lib/prismadb'
 
-import { BillboardClient } from "./components/client"
-import { BillboardColumn } from "./components/columns"
+import { BillboardClient } from './components/client'
+import { BillboardColumn } from './components/columns'
 
 type Params = { params: { storeId: string } }
 
 export const metadata: Metadata = {
-  title: "Billboards",
-  description: "Store billboards",
+  title: 'Billboards',
+  description: 'Store billboards',
 }
 
 async function BillboardPage({ params }: Params) {
@@ -20,17 +20,17 @@ async function BillboardPage({ params }: Params) {
       storeId: params.storeId,
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
   })
 
-  const formatedBillboards: BillboardColumn[] = billboards.map((item) => ({
+  const formatedBillboards: BillboardColumn[] = billboards.map(item => ({
     id: item.id,
     label: item.label,
-    createdAt: format(item.createdAt, "MMM do, yyyy"),
+    createdAt: format(item.createdAt, 'MMM do, yyyy'),
   }))
   return (
-    <main className="container py-6">
+    <main className='container py-6'>
       <BillboardClient billboards={formatedBillboards} />
     </main>
   )

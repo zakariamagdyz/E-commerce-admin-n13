@@ -1,6 +1,6 @@
-import { cache } from "react"
+import { cache } from 'react'
 
-import prismadb from "@/lib/prismadb"
+import prismadb from '@/lib/prismadb'
 
 export const findColorById = cache(async (colorId: string) => {
   try {

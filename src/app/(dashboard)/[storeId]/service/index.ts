@@ -1,7 +1,7 @@
-import { Store } from "@prisma/client"
-import { cache } from "react"
+import { Store } from '@prisma/client'
+import { cache } from 'react'
 
-import prismadb from "@/lib/prismadb"
+import prismadb from '@/lib/prismadb'
 
 export const getStoreApi = cache(async (storeId: string, userId: string) => {
   let store: Store | null

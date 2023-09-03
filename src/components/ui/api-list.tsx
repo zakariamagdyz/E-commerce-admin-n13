@@ -1,11 +1,11 @@
-"use client"
+'use client'
 
-import { useParams } from "next/navigation"
-import React from "react"
+import { useParams } from 'next/navigation'
+import React from 'react'
 
-import useOrigin from "@/hooks/use-origin"
+import useOrigin from '@/hooks/use-origin'
 
-import ApiAlert from "./api-alert"
+import ApiAlert from './api-alert'
 
 type Props = { entityName: string; entityIdName: string }
 
@@ -16,12 +16,12 @@ function ApiList({ entityIdName, entityName }: Props) {
   const baseUrl = `${origin}/api/${params.storeId}`
 
   return (
-    <article className="space-y-4">
-      <ApiAlert title="GET" variant="public" description={`${baseUrl}/${entityName}`} />
-      <ApiAlert title="GET" variant="public" description={`${baseUrl}/${entityName}/{${entityIdName}}`} />
-      <ApiAlert title="POST" variant="admin" description={`${baseUrl}/${entityName}`} />
-      <ApiAlert title="PATCH" variant="admin" description={`${baseUrl}/${entityName}/{${entityIdName}}`} />
-      <ApiAlert title="DELETE" variant="admin" description={`${baseUrl}/${entityName}/{${entityIdName}}`} />
+    <article className='space-y-4'>
+      <ApiAlert title='GET' variant='public' description={`${baseUrl}/${entityName}`} />
+      <ApiAlert title='GET' variant='public' description={`${baseUrl}/${entityName}/{${entityIdName}}`} />
+      <ApiAlert title='POST' variant='admin' description={`${baseUrl}/${entityName}`} />
+      <ApiAlert title='PATCH' variant='admin' description={`${baseUrl}/${entityName}/{${entityIdName}}`} />
+      <ApiAlert title='DELETE' variant='admin' description={`${baseUrl}/${entityName}/{${entityIdName}}`} />
     </article>
   )
 }

@@ -1,18 +1,18 @@
-import { format } from "date-fns"
-import { Metadata } from "next"
-import React from "react"
+import { format } from 'date-fns'
+import { Metadata } from 'next'
+import React from 'react'
 
-import prismadb from "@/lib/prismadb"
-import { formatter } from "@/lib/utils"
+import prismadb from '@/lib/prismadb'
+import { formatter } from '@/lib/utils'
 
-import { ProductClient } from "./components/client"
-import { ProductColumn } from "./components/columns"
+import { ProductClient } from './components/client'
+import { ProductColumn } from './components/columns'
 
 type Params = { params: { storeId: string } }
 
 export const metadata: Metadata = {
-  title: "Products",
-  description: "Store produts",
+  title: 'Products',
+  description: 'Store produts',
 }
 
 async function ProductsPage({ params }: Params) {
@@ -26,11 +26,11 @@ async function ProductsPage({ params }: Params) {
       color: true,
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
   })
 
-  const formatedProcuts: ProductColumn[] = products.map((item) => ({
+  const formatedProcuts: ProductColumn[] = products.map(item => ({
     id: item.id,
     name: item.name,
     isFeatured: item.isFeatured,
@@ -39,10 +39,10 @@ async function ProductsPage({ params }: Params) {
     category: item.category.name,
     size: item.size.name,
     color: item.color.value,
-    createdAt: format(item.createdAt, "MMM do, yyyy"),
+    createdAt: format(item.createdAt, 'MMM do, yyyy'),
   }))
   return (
-    <main className="container py-6">
+    <main className='container py-6'>
       <ProductClient products={formatedProcuts} />
     </main>
   )

@@ -1,18 +1,18 @@
-import { format } from "date-fns"
-import { Metadata } from "next"
-import React from "react"
+import { format } from 'date-fns'
+import { Metadata } from 'next'
+import React from 'react'
 
-import prismadb from "@/lib/prismadb"
-import { formatter } from "@/lib/utils"
+import prismadb from '@/lib/prismadb'
+import { formatter } from '@/lib/utils'
 
-import { BillboardClient } from "./components/client"
-import { OrderColumn } from "./components/columns"
+import { BillboardClient } from './components/client'
+import { OrderColumn } from './components/columns'
 
 type Params = { params: { storeId: string } }
 
 export const metadata: Metadata = {
-  title: "Orders",
-  description: "Store orders",
+  title: 'Orders',
+  description: 'Store orders',
 }
 
 async function BillboardPage({ params }: Params) {
@@ -28,21 +28,21 @@ async function BillboardPage({ params }: Params) {
       },
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
   })
 
-  const formatedOrders: OrderColumn[] = orders.map((item) => ({
+  const formatedOrders: OrderColumn[] = orders.map(item => ({
     id: item.id,
     phone: item.phone,
     address: item.address,
-    products: item.orderItems.map((orderItem) => (orderItem.product ? orderItem.product.name : "")).join(", "),
+    products: item.orderItems.map(orderItem => (orderItem.product ? orderItem.product.name : '')).join(', '),
     totalPrice: formatter.format(item.orderItems.reduce((acc, orderItem) => acc + orderItem.product.price, 0)),
     isPaid: item.isPaid,
-    createdAt: format(item.createdAt, "MMM do, yyyy"),
+    createdAt: format(item.createdAt, 'MMM do, yyyy'),
   }))
   return (
-    <main className="container py-6">
+    <main className='container py-6'>
       <BillboardClient orders={formatedOrders} />
     </main>
   )

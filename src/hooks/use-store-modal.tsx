@@ -1,4 +1,4 @@
-import { create } from "zustand"
+import { create } from 'zustand'
 
 type useStoreModalStore = {
   isOpen: boolean
@@ -6,7 +6,7 @@ type useStoreModalStore = {
   closeModal: () => void
 }
 
-export const useStoreModal = create<useStoreModalStore>()((set) => ({
+export const useStoreModal = create<useStoreModalStore>()(set => ({
   isOpen: false,
   openModal: () => set({ isOpen: true }),
   closeModal: () => set({ isOpen: false }),

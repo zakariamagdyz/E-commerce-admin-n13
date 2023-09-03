@@ -1,7 +1,7 @@
-import { Metadata } from "next"
+import { Metadata } from 'next'
 
-import { ColorForm } from "../components/color-form"
-import { findColorById } from "../service"
+import { ColorForm } from '../components/color-form'
+import { findColorById } from '../service'
 
 type Props = {
   params: {
@@ -12,7 +12,7 @@ type Props = {
 export async function generateMetadata({ params: { colorId } }: Props): Promise<Metadata> {
   const color = await findColorById(colorId)
   if (!color) {
-    return { title: "Create new Color" }
+    return { title: 'Create new Color' }
   }
 
   return {
@@ -25,7 +25,7 @@ async function ColorFormpage({ params }: Props) {
   const color = await findColorById(params.colorId)
 
   return (
-    <main className="container py-6">
+    <main className='container py-6'>
       <ColorForm initialData={color} />
     </main>
   )

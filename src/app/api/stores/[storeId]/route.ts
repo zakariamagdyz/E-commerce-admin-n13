@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server"
-import { getServerSession } from "next-auth"
-import { z } from "zod"
+import { NextResponse } from 'next/server'
+import { getServerSession } from 'next-auth'
+import { z } from 'zod'
 
-import { options } from "@/app/api/auth/[...nextauth]/options"
-import prismadb from "@/lib/prismadb"
+import { options } from '@/app/api/auth/[...nextauth]/options'
+import prismadb from '@/lib/prismadb'
 
-import { bodySchema } from "../schema"
+import { bodySchema } from '../schema'
 
 export async function PATCH(req: Request, { params }: { params: { storeId: string } }) {
   try {
@@ -13,7 +13,7 @@ export async function PATCH(req: Request, { params }: { params: { storeId: strin
     const session = await getServerSession(options)
     if (!session?.user.id) {
       return NextResponse.json(
-        { message: "UnAuthenticated" },
+        { message: 'UnAuthenticated' },
         {
           status: 401,
         }
@@ -40,9 +40,9 @@ export async function PATCH(req: Request, { params }: { params: { storeId: strin
         }
       )
     }
-    console.log("[STORE_PATCH]", error)
+    console.log('[STORE_PATCH]', error)
     return NextResponse.json(
-      { message: "Something went wrong" },
+      { message: 'Something went wrong' },
       {
         status: 500,
       }
@@ -56,7 +56,7 @@ export async function DELETE(_req: Request, { params }: { params: { storeId: str
     const session = await getServerSession(options)
     if (!session?.user.id) {
       return NextResponse.json(
-        { message: "UnAuthenticated" },
+        { message: 'UnAuthenticated' },
         {
           status: 401,
         }
@@ -65,11 +65,11 @@ export async function DELETE(_req: Request, { params }: { params: { storeId: str
     await prismadb.store.delete({
       where: { id: params.storeId, userId: session.user.id },
     })
-    return NextResponse.json({ message: "Store has been deleted successfully" }, { status: 200 })
+    return NextResponse.json({ message: 'Store has been deleted successfully' }, { status: 200 })
   } catch (error) {
-    console.log("[STORE_DELETE]", error)
+    console.log('[STORE_DELETE]', error)
     return NextResponse.json(
-      { message: "Something went wrong" },
+      { message: 'Something went wrong' },
       {
         status: 500,
       }

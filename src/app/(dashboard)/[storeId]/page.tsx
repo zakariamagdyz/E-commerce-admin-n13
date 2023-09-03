@@ -1,19 +1,19 @@
-import { CreditCard, DollarSign, Package } from "lucide-react"
-import { Metadata } from "next"
+import { CreditCard, DollarSign, Package } from 'lucide-react'
+import { Metadata } from 'next'
 
-import { Overview } from "@/components/overview"
-import RevalidateButton from "@/components/revalidate-button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Heading } from "@/components/ui/heading"
-import { Separator } from "@/components/ui/separator"
-import { formatter } from "@/lib/utils"
-import { getGraphRevenue } from "@/services/get-graph-revenue"
-import { getSalesCount } from "@/services/get-sales-count"
-import { getStockCount } from "@/services/get-stock-count"
-import { getTotalRevenue } from "@/services/get-total-revenue"
-import { checkForSession } from "@/utils/checkForSession"
+import { Overview } from '@/components/overview'
+import RevalidateButton from '@/components/revalidate-button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Heading } from '@/components/ui/heading'
+import { Separator } from '@/components/ui/separator'
+import { formatter } from '@/lib/utils'
+import { getGraphRevenue } from '@/services/get-graph-revenue'
+import { getSalesCount } from '@/services/get-sales-count'
+import { getStockCount } from '@/services/get-stock-count'
+import { getTotalRevenue } from '@/services/get-total-revenue'
+import { checkForSession } from '@/utils/checkForSession'
 
-import { getStoreApi } from "./service"
+import { getStoreApi } from './service'
 
 type Props = {
   params: { storeId: string }
@@ -23,7 +23,7 @@ export async function generateMetadata({ params: { storeId } }: Props): Promise<
   const user = await checkForSession()
   const store = await getStoreApi(storeId, user.id)
   if (!store) {
-    return { title: "Store Not Found" }
+    return { title: 'Store Not Found' }
   }
 
   return {
@@ -39,47 +39,47 @@ async function page({ params }: Props) {
   const stockCount = await getStockCount(params.storeId)
 
   return (
-    <main className="container py-8">
-      <section className="space-y-4 p-8 pt-6">
-        <div className="flex flex-col  justify-between gap-4 sm:flex-row sm:items-center">
-          <Heading title="Dashboard" description="Overview of your store" />
+    <main className='container py-8'>
+      <section className='space-y-4 p-8 pt-6'>
+        <div className='flex flex-col  justify-between gap-4 sm:flex-row sm:items-center'>
+          <Heading title='Dashboard' description='Overview of your store' />
           <RevalidateButton />
         </div>
         <Separator />
       </section>
-      <section className="grid grid-cols-3 gap-4">
+      <section className='grid grid-cols-3 gap-4'>
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between text-sm font-medium">
+          <CardHeader className='flex flex-row items-center justify-between text-sm font-medium'>
             Total Revenue
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
+            <DollarSign className='h-4 w-4 text-muted-foreground' />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{formatter.format(totalRevenue)}</div>
+            <div className='text-2xl font-bold'>{formatter.format(totalRevenue)}</div>
           </CardContent>
         </Card>
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between text-sm font-medium">
+          <CardHeader className='flex flex-row items-center justify-between text-sm font-medium'>
             Sales
-            <CreditCard className="h-4 w-4 text-muted-foreground" />
+            <CreditCard className='h-4 w-4 text-muted-foreground' />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+{salesCount}</div>
+            <div className='text-2xl font-bold'>+{salesCount}</div>
           </CardContent>
         </Card>
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between text-sm font-medium">
+          <CardHeader className='flex flex-row items-center justify-between text-sm font-medium'>
             Product In Stock
-            <Package className="h-4 w-4 text-muted-foreground" />
+            <Package className='h-4 w-4 text-muted-foreground' />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stockCount}</div>
+            <div className='text-2xl font-bold'>{stockCount}</div>
           </CardContent>
-        </Card>{" "}
-        <Card className="col-span-4">
+        </Card>{' '}
+        <Card className='col-span-4'>
           <CardHeader>
             <CardTitle>Overview</CardTitle>
           </CardHeader>
-          <CardContent className="pl-2">
+          <CardContent className='pl-2'>
             <Overview data={graphRevenue} />
           </CardContent>
         </Card>

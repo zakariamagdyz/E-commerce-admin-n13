@@ -1,6 +1,6 @@
-import { useParams, useRouter } from "next/navigation"
-import { useState } from "react"
-import { toast } from "react-hot-toast"
+import { useParams, useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { toast } from 'react-hot-toast'
 
 type UseDeleteModal = {
   active: boolean
@@ -22,7 +22,7 @@ export const useDeleteModal = ({ active, pushToColors, colorId }: UseDeleteModal
     setLoading(true)
     try {
       const res = await fetch(`/api/${storeId}/colors/${colorId}`, {
-        method: "DELETE",
+        method: 'DELETE',
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.message)
@@ -30,9 +30,9 @@ export const useDeleteModal = ({ active, pushToColors, colorId }: UseDeleteModal
       router.refresh()
       if (pushToColors) router.push(`/${storeId}/colors`)
 
-      toast.success("Color deleted")
+      toast.success('Color deleted')
     } catch (error) {
-      if (error instanceof Error) toast.error("Make sure you removed all products useing this Color")
+      if (error instanceof Error) toast.error('Make sure you removed all products useing this Color')
     } finally {
       setLoading(false)
       onClose()

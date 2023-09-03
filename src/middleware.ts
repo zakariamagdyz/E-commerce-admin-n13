@@ -22,7 +22,7 @@ const corsHeaders = {
 export default withAuth(
   // `withAuth` augments your `Request` with the user's token.
   //request: NextRequestWithAuth
-  function middleware(request) {
+  function middleware() {
     // const origin = request.headers.get("origin")
 
     // if (origin && !allowedOrigins.includes(origin)) {
