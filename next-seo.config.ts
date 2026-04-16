@@ -4,6 +4,7 @@ const config = {
   description: 'Empowering Developers through Professional Videos and courses',
   defaultTitle: 'Islam maboud (coderOne)',
   canonical: 'https://coderOne.com',
+
   additionalLinkTags: [
     {
       rel: 'icon',
